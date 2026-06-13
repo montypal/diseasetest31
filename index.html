@@ -3,135 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Aria & Dr. Allison's Biostats Exam (Part 3)</title>
+    <title>Dr. Emogen, Dr. Aria & Dr. Allison's Biostats Exam</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        #app-container {
-            background: #fff;
-            max-width: 850px;
-            width: 100%;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        #score-tracker {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #2c3e50;
-            background: #eaf2f8;
-            padding: 8px 15px;
-            border-radius: 20px;
-        }
-        h1 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-        .question-text {
-            font-size: 1.15em;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .option-btn {
-            padding: 14px 20px;
-            font-size: 1em;
-            background-color: #ecf0f1;
-            border: 2px solid #bdc3c7;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: left;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-        .option-btn:hover:not(:disabled) {
-            background-color: #d5dbdb;
-        }
-        .option-btn:disabled {
-            cursor: not-allowed;
-        }
-        .option-btn.correct {
-            background-color: #d5f5e3;
-            border-color: #2ecc71;
-            color: #27ae60;
-        }
-        .option-btn.wrong {
-            background-color: #fadbd8;
-            border-color: #e74c3c;
-            color: #c0392b;
-        }
-        #feedback-container {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #fdfefe;
-            border-left: 5px solid #3498db;
-            display: none;
-            line-height: 1.6;
-            overflow-x: auto;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            background-color: white;
-        }
-        th, td {
-            border: 1px solid #bdc3c7;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #ecf0f1;
-            font-weight: bold;
-        }
-        .controls {
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
-        }
-        button.action-btn {
-            padding: 10px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            background-color: #3498db;
-            color: white;
-            font-weight: bold;
-        }
-        button.action-btn:hover {
-            background-color: #2980b9;
-        }
-        button#end-btn {
-            background-color: #e74c3c;
-        }
-        button#end-btn:hover {
-            background-color: #c0392b;
-        }
-        #results-screen {
-            text-align: center;
-            display: none;
-        }
-        #results-screen h2 {
-            font-size: 2.5em;
-            color: #2c3e50;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        #app-container { background: #fff; max-width: 850px; width: 100%; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; }
+        #score-tracker { position: absolute; top: 20px; right: 30px; font-size: 1.1em; font-weight: bold; color: #2c3e50; background: #eaf2f8; padding: 8px 15px; border-radius: 20px; }
+        h1 { color: #2c3e50; font-size: 1.8em; margin-bottom: 5px; }
+        .question-text { font-size: 1.15em; margin-bottom: 25px; line-height: 1.6; }
+        .options-container { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn { padding: 14px 20px; font-size: 1em; background-color: #ecf0f1; border: 2px solid #bdc3c7; border-radius: 6px; cursor: pointer; text-align: left; transition: background-color 0.2s, border-color 0.2s; }
+        .option-btn:hover:not(:disabled) { background-color: #d5dbdb; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .option-btn.correct { background-color: #d5f5e3; border-color: #2ecc71; color: #27ae60; }
+        .option-btn.wrong { background-color: #fadbd8; border-color: #e74c3c; color: #c0392b; }
+        #feedback-container { margin-top: 25px; padding: 20px; background-color: #fdfefe; border-left: 5px solid #3498db; display: none; line-height: 1.6; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; margin-top: 15px; margin-bottom: 15px; background-color: white; }
+        th, td { border: 1px solid #bdc3c7; padding: 10px; text-align: center; }
+        th { background-color: #ecf0f1; font-weight: bold; }
+        .controls { margin-top: 30px; display: flex; justify-content: space-between; }
+        button.action-btn { padding: 10px 20px; font-size: 1em; border: none; border-radius: 6px; cursor: pointer; background-color: #3498db; color: white; font-weight: bold; }
+        button.action-btn:hover { background-color: #2980b9; }
+        button#end-btn { background-color: #e74c3c; }
+        button#end-btn:hover { background-color: #c0392b; }
+        #results-screen { text-align: center; display: none; }
+        #results-screen h2 { font-size: 2.5em; color: #2c3e50; }
     </style>
 </head>
 <body>
@@ -142,13 +37,8 @@
     <div id="quiz-screen">
         <h1 id="question-number">Question 1</h1>
         <div id="question-text" class="question-text">Loading question...</div>
-        
-        <div id="options" class="options-container">
-            </div>
-
-        <div id="feedback-container">
-            </div>
-
+        <div id="options" class="options-container"></div>
+        <div id="feedback-container"></div>
         <div class="controls">
             <button id="end-btn" class="action-btn" onclick="endTest()">End Test Now</button>
             <button id="next-btn" class="action-btn" onclick="nextQuestion()" style="display: none;">Next Question &raquo;</button>
@@ -165,296 +55,190 @@
 
 <script>
     const questionsData = [
+        // --- DR. EMOGEN QUESTIONS (1-10) ---
+        { 
+            question: `Dr. Emogen has been dispatched to the annual Sparkle Convention after several attendees reported coughing up craft supplies. She suspects a condition known as "Glitter Lung" and develops the 'Sparkle-Scan' to screen for it. To test its efficacy, she recruits 500 convention-goers. Through a meticulous and invasive gold-standard biopsy, she determines that exactly 100 of these individuals genuinely suffer from Glitter Lung. When she runs all 500 individuals through her new Sparkle-Scan, the machine flags 120 people as positive. However, upon cross-referencing her data, she realizes the machine completely missed 20 people who actually had the disease. <br><br>Based on this data, what are the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Sparkle-Scan?`, 
+            options: ["Sens: 80%, Spec: 75%, PPV: 66.7%, NPV: 86.4%", "Sens: 80%, Spec: 90%, PPV: 66.7%, NPV: 94.7%", "Sens: 20%, Spec: 75%, PPV: 33.3%, NPV: 86.4%", "Sens: 90%, Spec: 80%, PPV: 75.0%, NPV: 90.0%"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: Sens: 80%, Spec: 90%, PPV: 66.7%, NPV: 94.7%</strong><br><br><strong>Extracted Data:</strong><br>• Total participants = 500<br>• Truly have disease = 100 (So, healthy = 400).<br>• Test positive overall = 120.<br>• False Negatives = 20.<br>• True Positives = 100 - 20 = 80.<br>• False Positives = 120 - 80 = 40.<br>• True Negatives = 400 - 40 = 360.<br><table><tr><th></th><th>Glitter Lung (+)</th><th>Glitter Lung (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>80</td><td>40</td><td>120</td></tr><tr><td><strong>Test (-)</strong></td><td>20</td><td>360</td><td>380</td></tr><tr style="font-weight: bold;"><td>Total</td><td>100</td><td>400</td><td>500</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 80 / 100 = 80%<br>• Specificity = 360 / 400 = 90%<br>• PPV = 80 / 120 = 66.7%<br>• NPV = 360 / 380 = 94.7%` 
+        },
+        { 
+            question: `Dr. Emogen is investigating a bizarre outbreak at the local county fair where several attendees are presenting with "Neon Burpitis," a harmless but alarming condition causing glowing burps. She suspects the fair's new novelty food, "Radioactive Jalapeño Poppers," is the culprit. She conducts a cohort study following 400 fairgoers. She notes that 150 of these attendees braved the Radioactive Jalapeño Poppers, while the rest opted for safer snacks. By the end of the night, a total of 140 attendees had developed Neon Burpitis. Interestingly, 50 of those who developed the glowing burps had actively avoided the jalapeño poppers entirely. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong> for developing Neon Burpitis after eating the poppers.`, 
+            options: ["RR: 2.0, OR: 4.5", "RR: 6.0, OR: 3.0", "RR: 3.0, OR: 6.0", "RR: 0.33, OR: 0.16"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: RR: 3.0, OR: 6.0</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 400<br>• Exposed = 150 (So, Unexposed = 250).<br>• Total Sick = 140.<br>• Sick & Unexposed = 50.<br>• Sick & Exposed = 140 - 50 = 90.<br>• Healthy & Exposed = 150 - 90 = 60.<br>• Healthy & Unexposed = 250 - 50 = 200.<br><table><tr><th></th><th>Neon Burpitis (+)</th><th>Neon Burpitis (-)</th><th>Total</th></tr><tr><td><strong>Ate Poppers (+)</strong></td><td>90 (A)</td><td>60 (B)</td><td>150</td></tr><tr><td><strong>No Poppers (-)</strong></td><td>50 (C)</td><td>200 (D)</td><td>250</td></tr><tr style="font-weight: bold;"><td>Total</td><td>140</td><td>260</td><td>400</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 90 / 150 = 0.60<br>• Risk (Unexposed) = 50 / 250 = 0.20<br>• Relative Risk (RR) = 0.60 / 0.20 = 3.0<br>• Odds Ratio (OR) = (90 × 200) / (60 × 50) = 18000 / 3000 = 6.0` 
+        },
+        { 
+            question: `Dr. Emogen initiates a case-control study to determine if wearing polyester pants is associated with contracting "Disco Fever." She visits a local retro dance club and recruits 100 participants: 60 who are actively suffering from Disco Fever (the cases) and 40 who are completely symptom-free (the controls). Through extensive interviews regarding their wardrobe choices over the past week, she discovers that a total of 70 participants had worn polyester pants. Among the healthy control group, exactly half of them had avoided polyester pants entirely. <br><br>Based on this study design, calculate the <strong>Odds Ratio (OR)</strong>.`, 
+            options: ["OR: 2.5", "OR: 5.0", "OR: 10.0", "OR: 1.25"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: OR: 5.0</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 60, Controls = 40<br>• Total Exposed = 70.<br>• Unexposed Controls = Half of 40 = 20.<br>• Exposed Controls = 40 - 20 = 20.<br>• Exposed Cases = 70 - 20 = 50.<br>• Unexposed Cases = 60 - 50 = 10.<br><table><tr><th></th><th>Disco Fever (Cases)</th><th>No Fever (Controls)</th><th>Total</th></tr><tr><td><strong>Polyester (+)</strong></td><td>50 (A)</td><td>20 (B)</td><td>70</td></tr><tr><td><strong>No Polyester (-)</strong></td><td>10 (C)</td><td>20 (D)</td><td>30</td></tr><tr style="font-weight: bold;"><td>Total</td><td>60</td><td>40</td><td>100</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (50 × 20) / (20 × 10) = 1000 / 200 = 5.0` 
+        },
+        { 
+            question: `Dr. Emogen is urgently evaluating the new 'Brain-Hunger Screen' for detecting the Zombie Virus during an outbreak in a secluded town of 800 residents. She mandates testing for the entire town. Fortunately, her rigorous clinical follow-up confirms that only 150 residents actually carry the true Zombie Virus. The screening test, however, ends up flagging 200 residents as positive. While reviewing the data, Dr. Emogen notes that the test terrified 80 completely healthy residents by falsely labeling them as infected. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Brain-Hunger Screen.`, 
+            options: ["Sens: 60%, Spec: 95%, PPV: 80%, NPV: 87.7%", "Sens: 95%, Spec: 80%, PPV: 87.7%, NPV: 60%", "Sens: 87.7%, Spec: 60%, PPV: 95%, NPV: 80%", "Sens: 80%, Spec: 87.7%, PPV: 60%, NPV: 95%"], 
+            correctIndex: 3, 
+            explanation: `<strong>Correct Answer: Sens: 80%, Spec: 87.7%, PPV: 60%, NPV: 95%</strong><br><br><strong>Extracted Data:</strong><br>• Total town = 800<br>• Disease Positive = 150 (So, Disease Negative = 650).<br>• Test Positive overall = 200.<br>• False Positives = 80.<br>• True Positives = 200 - 80 = 120.<br>• False Negatives = 150 - 120 = 30.<br>• True Negatives = 650 - 80 = 570.<br><table><tr><th></th><th>Zombie Virus (+)</th><th>Zombie Virus (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>120</td><td>80</td><td>200</td></tr><tr><td><strong>Test (-)</strong></td><td>30</td><td>570</td><td>600</td></tr><tr style="font-weight: bold;"><td>Total</td><td>150</td><td>650</td><td>800</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 120 / 150 = 80%<br>• Specificity = 570 / 650 = 87.7%<br>• PPV = 120 / 200 = 60%<br>• NPV = 570 / 600 = 95%` 
+        },
+        { 
+            question: `Dr. Emogen is conducting a prospective cohort study at a culinary institute to see if kneading dough without gloves leads to an embarrassing dermatological condition known as "Spaghetti Fingers." She tracks a cohort of 500 culinary students for a full year. She observes that 300 students consistently knead dough without gloves (the exposed group). By the end of the year, 120 students in the exposed group had developed Spaghetti Fingers. Meanwhile, in the group of students who strictly wore gloves, 160 of them managed to avoid the condition entirely. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: ["RR: 2.0, OR: 2.67", "RR: 3.0, OR: 2.0", "RR: 2.67, OR: 2.0", "RR: 0.5, OR: 0.37"], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: RR: 2.0, OR: 2.67</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 500<br>• Exposed = 300 (So, Unexposed = 200).<br>• Exposed & Sick = 120.<br>• Exposed & Healthy = 300 - 120 = 180.<br>• Unexposed & Healthy = 160.<br>• Unexposed & Sick = 200 - 160 = 40.<br><table><tr><th></th><th>Spaghetti Fingers (+)</th><th>Spaghetti Fingers (-)</th><th>Total</th></tr><tr><td><strong>No Gloves (+)</strong></td><td>120 (A)</td><td>180 (B)</td><td>300</td></tr><tr><td><strong>Gloves (-)</strong></td><td>40 (C)</td><td>160 (D)</td><td>200</td></tr><tr style="font-weight: bold;"><td>Total</td><td>160</td><td>340</td><td>500</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 120 / 300 = 0.40<br>• Risk (Unexposed) = 40 / 200 = 0.20<br>• Relative Risk (RR) = 0.40 / 0.20 = 2.0<br>• Odds Ratio (OR) = (120 × 160) / (180 × 40) = 19200 / 7200 = 2.67` 
+        },
+        { 
+            question: `Dr. Emogen investigates a highly contagious outbreak of "Giggle Pox" at an elementary school of 400 students. She uses the new 'Tickle-Test' to screen the children. Through gold-standard observation, she knows exactly 80 students truly have Giggle Pox. When she runs the Tickle-Test on the entire school, it flags 100 students as positive. However, upon closer inspection, she realizes that 30 of these flagged students are actually perfectly healthy and just naturally giggly. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Tickle-Test.`, 
+            options: ["Sens: 70%, Spec: 96.7%, PPV: 87.5%, NPV: 90.6%", "Sens: 87.5%, Spec: 90.6%, PPV: 70%, NPV: 96.7%", "Sens: 90.6%, Spec: 87.5%, PPV: 96.7%, NPV: 70%", "Sens: 87.5%, Spec: 70%, PPV: 90.6%, NPV: 96.7%"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: Sens: 87.5%, Spec: 90.6%, PPV: 70%, NPV: 96.7%</strong><br><br><strong>Extracted Data:</strong><br>• Total students = 400<br>• Truly Sick = 80 (So, Truly Healthy = 320).<br>• Total Test Positive = 100.<br>• False Positives = 30.<br>• True Positives = 100 - 30 = 70.<br>• False Negatives = 80 - 70 = 10.<br>• True Negatives = 320 - 30 = 290.<br><table><tr><th></th><th>Giggle Pox (+)</th><th>Giggle Pox (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>70</td><td>30</td><td>100</td></tr><tr><td><strong>Test (-)</strong></td><td>10</td><td>290</td><td>300</td></tr><tr style="font-weight: bold;"><td>Total</td><td>80</td><td>320</td><td>400</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 70 / 80 = 87.5%<br>• Specificity = 290 / 320 = 90.6%<br>• PPV = 70 / 100 = 70%<br>• NPV = 290 / 300 = 96.7%` 
+        },
+        { 
+            question: `Dr. Emogen is at a sprawling summer food festival investigating an epidemic of "Taco Sweats". She follows a cohort of 600 attendees throughout the day. She observes that 200 attendees bravely consumed the notorious "Lava Sauce", while the remaining 400 avoided it entirely. By sunset, a total of 150 people had developed Taco Sweats. Interestingly, exactly 100 of the people who ended up sick had eaten the Lava Sauce. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: ["RR: 4.0, OR: 7.0", "RR: 7.0, OR: 4.0", "RR: 2.5, OR: 5.0", "RR: 1.5, OR: 3.5"], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: RR: 4.0, OR: 7.0</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 600<br>• Exposed = 200.<br>• Unexposed = 400.<br>• Total Sick = 150.<br>• Sick & Exposed = 100.<br>• Sick & Unexposed = 150 - 100 = 50.<br>• Healthy & Exposed = 200 - 100 = 100.<br>• Healthy & Unexposed = 400 - 50 = 350.<br><table><tr><th></th><th>Taco Sweats (+)</th><th>Taco Sweats (-)</th><th>Total</th></tr><tr><td><strong>Lava Sauce (+)</strong></td><td>100 (A)</td><td>100 (B)</td><td>200</td></tr><tr><td><strong>No Sauce (-)</strong></td><td>50 (C)</td><td>350 (D)</td><td>400</td></tr><tr style="font-weight: bold;"><td>Total</td><td>150</td><td>450</td><td>600</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 100 / 200 = 0.50<br>• Risk (Unexposed) = 50 / 400 = 0.125<br>• Relative Risk (RR) = 0.50 / 0.125 = 4.0<br>• Odds Ratio (OR) = (100 × 350) / (100 × 50) = 35000 / 5000 = 7.0` 
+        },
+        { 
+            question: `Dr. Emogen sets up a case-control study to investigate the origins of "Leprechaun Ear." She visits a specialized ear clinic and recruits 120 patients with Leprechaun Ear (the cases) and 120 patients with perfectly normal ears (the controls). She queries them extensively about their past consumption of 4-Leaf Clover Tea. Her data reveals that 100 participants in the entire study had a history of drinking the tea. Surprisingly, when looking strictly at the healthy control group, 100 of them had never touched the tea in their lives. <br><br>Determine the <strong>Odds Ratio (OR)</strong>.`, 
+            options: ["OR: 4.0", "OR: 8.0", "OR: 10.0", "OR: 12.0"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 10.0</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 120, Controls = 120<br>• Total Exposed = 100.<br>• Unexposed Controls = 100.<br>• Exposed Controls = 120 - 100 = 20.<br>• Exposed Cases = 100 - 20 = 80.<br>• Unexposed Cases = 120 - 80 = 40.<br><table><tr><th></th><th>Leprechaun Ear (Cases)</th><th>Normal (Controls)</th><th>Total</th></tr><tr><td><strong>Tea (+)</strong></td><td>80 (A)</td><td>20 (B)</td><td>100</td></tr><tr><td><strong>No Tea (-)</strong></td><td>40 (C)</td><td>100 (D)</td><td>140</td></tr><tr style="font-weight: bold;"><td>Total</td><td>120</td><td>120</td><td>240</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (80 × 100) / (20 × 40) = 8000 / 800 = 10.0` 
+        },
+        { 
+            question: `Dr. Emogen uses the cutting-edge Minty-Meter on 1000 villagers to screen for "Dragon Breath". Through separate, definitive breath-analysis testing, she knows that 200 villagers truly have the condition. The Minty-Meter successfully identifies 180 of these afflicted villagers. However, the machine is a bit sensitive to recent toothpaste use, and it falsely flags 40 perfectly healthy villagers as having Dragon Breath. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Minty-Meter.`, 
+            options: ["Sens: 95%, Spec: 90%, PPV: 97.4%, NPV: 81.8%", "Sens: 81.8%, Spec: 97.4%, PPV: 90%, NPV: 95%", "Sens: 90%, Spec: 95%, PPV: 81.8%, NPV: 97.4%", "Sens: 90%, Spec: 81.8%, PPV: 95%, NPV: 97.4%"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: Sens: 90%, Spec: 95%, PPV: 81.8%, NPV: 97.4%</strong><br><br><strong>Extracted Data:</strong><br>• Total villagers = 1000<br>• Truly Sick = 200 (So, Truly Healthy = 800).<br>• True Positives = 180.<br>• False Negatives = 200 - 180 = 20.<br>• False Positives = 40.<br>• True Negatives = 800 - 40 = 760.<br>• Total Test Positive = 180 + 40 = 220.<br>• Total Test Negative = 20 + 760 = 780.<br><table><tr><th></th><th>Dragon Breath (+)</th><th>Dragon Breath (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>180</td><td>40</td><td>220</td></tr><tr><td><strong>Test (-)</strong></td><td>20</td><td>760</td><td>780</td></tr><tr style="font-weight: bold;"><td>Total</td><td>200</td><td>800</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 180 / 200 = 90%<br>• Specificity = 760 / 800 = 95%<br>• PPV = 180 / 220 = 81.8%<br>• NPV = 760 / 780 = 97.4%` 
+        },
+        { 
+            question: `Dr. Emogen tracks 500 sailors in a five-year longitudinal cohort study to see if being assigned to swab-the-deck duty leads to "Pirate Peg-Leg". She notes that 100 sailors are assigned the arduous swabbing duty (the exposed group), while 400 are given other tasks. Over the course of the study, 60 sailors in total develop the dreaded Pirate Peg-Leg. When reviewing the rosters, she finds that 40 of the afflicted sailors were actually never assigned swabbing duty. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: ["RR: 0.5, OR: 0.44", "RR: 2.0, OR: 2.25", "RR: 2.25, OR: 2.0", "RR: 4.0, OR: 3.5"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: RR: 2.0, OR: 2.25</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 500<br>• Exposed = 100, Unexposed = 400.<br>• Total Sick = 60.<br>• Sick & Unexposed = 40.<br>• Sick & Exposed = 60 - 40 = 20.<br>• Healthy & Exposed = 100 - 20 = 80.<br>• Healthy & Unexposed = 400 - 40 = 360.<br><table><tr><th></th><th>Pirate Peg-Leg (+)</th><th>Pirate Peg-Leg (-)</th><th>Total</th></tr><tr><td><strong>Swabbing (+)</strong></td><td>20 (A)</td><td>80 (B)</td><td>100</td></tr><tr><td><strong>No Swabbing (-)</strong></td><td>40 (C)</td><td>360 (D)</td><td>400</td></tr><tr style="font-weight: bold;"><td>Total</td><td>60</td><td>440</td><td>500</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 20 / 100 = 0.20<br>• Risk (Unexposed) = 40 / 400 = 0.10<br>• Relative Risk (RR) = 0.20 / 0.10 = 2.0<br>• Odds Ratio (OR) = (20 × 360) / (80 × 40) = 7200 / 3200 = 2.25` 
+        },
+        
+        // --- BATCH 2 (Dr. Aria & Dr. Allison - Questions 11-20) ---
+        { 
+            question: `Dr. Aria is validating the new "Groovy-Scanner" to detect a localized outbreak of "Chronic Disco Point." She tests a randomized sample of 1,000 citizens. Through a comprehensive gold-standard evaluation, she establishes that 300 citizens are truly suffering from the condition. When she processes the entire sample through her scanner, the machine returns 400 positive results. However, looking closely at the data, Dr. Aria notices that the machine completely missed 50 people who actually had the disease, falsely labeling them as healthy. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Groovy-Scanner.`, 
+            options: ["Sens: 83.3%, Spec: 78.6%, PPV: 62.5%, NPV: 91.7%", "Sens: 78.6%, Spec: 83.3%, PPV: 91.7%, NPV: 62.5%", "Sens: 83.3%, Spec: 85.0%, PPV: 60.0%, NPV: 90.5%", "Sens: 62.5%, Spec: 91.7%, PPV: 83.3%, NPV: 78.6%"], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: Sens: 83.3%, Spec: 78.6%, PPV: 62.5%, NPV: 91.7%</strong><br><br><strong>Extracted Data:</strong><br>• Total citizens = 1000<br>• Truly Sick = 300 (Truly Healthy = 700).<br>• Total Test Positive = 400.<br>• False Negatives = 50.<br>• True Positives = 300 - 50 = 250.<br>• False Positives = 400 - 250 = 150.<br>• True Negatives = 700 - 150 = 550.<br><table><tr><th></th><th>Disco Point (+)</th><th>Disco Point (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>250</td><td>150</td><td>400</td></tr><tr><td><strong>Test (-)</strong></td><td>50</td><td>550</td><td>600</td></tr><tr style="font-weight: bold;"><td>Total</td><td>300</td><td>700</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 250 / 300 = 83.3%<br>• Specificity = 550 / 700 = 78.6%<br>• PPV = 250 / 400 = 62.5%<br>• NPV = 550 / 600 = 91.7%` 
+        },
+        { 
+            question: `Dr. Allison is conducting a cohort study to determine if walking barefoot through Candyland leads to an ailment known as "Jellybean Toes." She recruits a cohort of 800 children. Over the course of the study, 200 children repeatedly walk barefoot through Candyland (the exposed group). By the end of the season, 150 children in total have developed Jellybean Toes. Interestingly, 50 of the children who developed the condition had strictly worn shoes and never walked barefoot through Candyland. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: ["RR: 4.0, OR: 8.5", "RR: 6.0, OR: 11.0", "RR: 3.0, OR: 5.5", "RR: 11.0, OR: 6.0"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: RR: 6.0, OR: 11.0</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 800<br>• Exposed = 200 (So, Unexposed = 600).<br>• Total Sick = 150.<br>• Sick & Unexposed = 50.<br>• Sick & Exposed = 150 - 50 = 100.<br>• Healthy & Exposed = 200 - 100 = 100.<br>• Healthy & Unexposed = 600 - 50 = 550.<br><table><tr><th></th><th>Jellybean Toes (+)</th><th>Jellybean Toes (-)</th><th>Total</th></tr><tr><td><strong>Barefoot (+)</strong></td><td>100 (A)</td><td>100 (B)</td><td>200</td></tr><tr><td><strong>Shoes (-)</strong></td><td>50 (C)</td><td>550 (D)</td><td>600</td></tr><tr style="font-weight: bold;"><td>Total</td><td>150</td><td>650</td><td>800</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 100 / 200 = 0.50<br>• Risk (Unexposed) = 50 / 600 = 0.0833<br>• Relative Risk (RR) = 0.50 / 0.0833 = 6.0<br>• Odds Ratio (OR) = (100 × 550) / (100 × 50) = 55000 / 5000 = 11.0` 
+        },
+        { 
+            question: `Dr. Aria initiates a case-control study to uncover the cause of the "Zombie Shuffle." She visits a local clinic and recruits 200 patients exhibiting the Zombie Shuffle (the cases) and 200 healthy volunteers (the controls). She investigates their medical histories to see if they had recently been bitten by a glowing mosquito. Her findings reveal that a total of 150 participants across the entire study had been bitten by the mosquito. Among the healthy control group, 30 individuals admitted to being bitten. <br><br>Based on this study, calculate the <strong>Odds Ratio (OR)</strong>.`, 
+            options: ["OR: 4.5", "OR: 6.0", "OR: 8.5", "OR: 10.2"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 8.5</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 200, Controls = 200<br>• Total Exposed = 150.<br>• Exposed Controls = 30.<br>• Unexposed Controls = 200 - 30 = 170.<br>• Exposed Cases = 150 - 30 = 120.<br>• Unexposed Cases = 200 - 120 = 80.<br><table><tr><th></th><th>Zombie Shuffle (Cases)</th><th>Healthy (Controls)</th><th>Total</th></tr><tr><td><strong>Bitten (+)</strong></td><td>120 (A)</td><td>30 (B)</td><td>150</td></tr><tr><td><strong>Not Bitten (-)</strong></td><td>80 (C)</td><td>170 (D)</td><td>250</td></tr><tr style="font-weight: bold;"><td>Total</td><td>200</td><td>200</td><td>400</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (120 × 170) / (30 × 80) = 20400 / 2400 = 8.5` 
+        },
+        { 
+            question: `Dr. Allison is testing a new "Silver-Comb" diagnostic tool to screen for "Werewolf Whiskers." She conducts a massive trial on 1,000 volunteers. Through rigorous genetic sequencing, she knows definitively that 100 of these volunteers secretly have the condition. The Silver-Comb ends up flagging 150 people as positive. When auditing the results, Dr. Allison discovers that the comb falsely triggered a positive result for 70 completely human volunteers. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Silver-Comb.`, 
+            options: ["Sens: 80.0%, Spec: 92.2%, PPV: 53.3%, NPV: 97.6%", "Sens: 92.2%, Spec: 80.0%, PPV: 97.6%, NPV: 53.3%", "Sens: 70.0%, Spec: 90.0%, PPV: 50.0%, NPV: 95.0%", "Sens: 85.0%, Spec: 95.5%, PPV: 60.0%, NPV: 90.0%"], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 92.2%, PPV: 53.3%, NPV: 97.6%</strong><br><br><strong>Extracted Data:</strong><br>• Total volunteers = 1000<br>• Truly Sick = 100 (So, Truly Healthy = 900).<br>• Total Test Positive = 150.<br>• False Positives = 70.<br>• True Positives = 150 - 70 = 80.<br>• False Negatives = 100 - 80 = 20.<br>• True Negatives = 900 - 70 = 830.<br><table><tr><th></th><th>Werewolf Whiskers (+)</th><th>Werewolf Whiskers (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>80</td><td>70</td><td>150</td></tr><tr><td><strong>Test (-)</strong></td><td>20</td><td>830</td><td>850</td></tr><tr style="font-weight: bold;"><td>Total</td><td>100</td><td>900</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 80 / 100 = 80.0%<br>• Specificity = 830 / 900 = 92.2%<br>• PPV = 80 / 150 = 53.3%<br>• NPV = 830 / 850 = 97.6%` 
+        },
+        { 
+            question: `Dr. Aria leads a cohort study tracking 500 tourists to determine if swimming in the local "Glitter Lagoon" results in developing "Mermaid Scales." During her observation, she notes that 300 tourists decide to swim in the lagoon (the exposed group), while 200 opt to stay completely dry. By the end of their vacation, an alarming 210 tourists have grown Mermaid Scales. Upon reviewing their itineraries, she finds that 180 of the afflicted tourists had indeed gone swimming in the lagoon. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: ["RR: 3.5, OR: 7.0", "RR: 4.0, OR: 8.5", "RR: 5.0, OR: 10.0", "RR: 2.0, OR: 4.5"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: RR: 4.0, OR: 8.5</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 500<br>• Exposed = 300, Unexposed = 200.<br>• Total Sick = 210.<br>• Sick & Exposed = 180.<br>• Healthy & Exposed = 300 - 180 = 120.<br>• Sick & Unexposed = 210 - 180 = 30.<br>• Healthy & Unexposed = 200 - 30 = 170.<br><table><tr><th></th><th>Mermaid Scales (+)</th><th>Mermaid Scales (-)</th><th>Total</th></tr><tr><td><strong>Swam (+)</strong></td><td>180 (A)</td><td>120 (B)</td><td>300</td></tr><tr><td><strong>Stayed Dry (-)</strong></td><td>30 (C)</td><td>170 (D)</td><td>200</td></tr><tr style="font-weight: bold;"><td>Total</td><td>210</td><td>290</td><td>500</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 180 / 300 = 0.60<br>• Risk (Unexposed) = 30 / 200 = 0.15<br>• Relative Risk (RR) = 0.60 / 0.15 = 4.0<br>• Odds Ratio (OR) = (180 × 170) / (120 × 30) = 30600 / 3600 = 8.5` 
+        },
+        { 
+            question: `Dr. Allison conducts a case-control study investigating "Robot Voice" syndrome in a tech-heavy city. She recruits 150 individuals currently speaking with a Robot Voice (the cases) and 150 individuals with normal voices (the controls). She investigates whether they had accidentally swallowed a prototype microchip. Across both groups, 120 participants had indeed swallowed the microchip. Dr. Allison finds that the vast majority of the healthy control group had avoided the chip, with 130 of them reporting they never swallowed it. <br><br>Based on this study, calculate the <strong>Odds Ratio (OR)</strong>.`, 
+            options: ["OR: 8.0", "OR: 10.5", "OR: 13.0", "OR: 15.0"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 13.0</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 150, Controls = 150<br>• Total Exposed = 120.<br>• Unexposed Controls = 130.<br>• Exposed Controls = 150 - 130 = 20.<br>• Exposed Cases = 120 - 20 = 100.<br>• Unexposed Cases = 150 - 100 = 50.<br><table><tr><th></th><th>Robot Voice (Cases)</th><th>Normal (Controls)</th><th>Total</th></tr><tr><td><strong>Chip (+)</strong></td><td>100 (A)</td><td>20 (B)</td><td>120</td></tr><tr><td><strong>No Chip (-)</strong></td><td>50 (C)</td><td>130 (D)</td><td>180</td></tr><tr style="font-weight: bold;"><td>Total</td><td>150</td><td>150</td><td>300</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (100 × 130) / (20 × 50) = 13000 / 1000 = 13.0` 
+        },
+        { 
+            question: `Dr. Aria uses a newly engineered 'Hover-Meter' to test 600 people for a rare condition called "Spontaneous Levitation." Through historical and observational gold-standard data, she is certain that 150 of these people truly have the condition. The Hover-Meter yields 200 positive results overall. However, Dr. Aria finds a flaw in the calibration: 30 people who actually suffer from the condition completely failed to register on the machine and tested negative. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Hover-Meter.`, 
+            options: ["Sens: 70.0%, Spec: 85.5%, PPV: 55.0%, NPV: 90.0%", "Sens: 80.0%, Spec: 82.2%, PPV: 60.0%, NPV: 92.5%", "Sens: 82.2%, Spec: 80.0%, PPV: 92.5%, NPV: 60.0%", "Sens: 90.0%, Spec: 75.5%, PPV: 65.0%, NPV: 85.0%"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 82.2%, PPV: 60.0%, NPV: 92.5%</strong><br><br><strong>Extracted Data:</strong><br>• Total people = 600<br>• Truly Sick = 150 (So, Truly Healthy = 450).<br>• Total Test Positive = 200.<br>• False Negatives = 30.<br>• True Positives = 150 - 30 = 120.<br>• False Positives = 200 - 120 = 80.<br>• True Negatives = 450 - 80 = 370.<br><table><tr><th></th><th>Levitation (+)</th><th>Levitation (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>120</td><td>80</td><td>200</td></tr><tr><td><strong>Test (-)</strong></td><td>30</td><td>370</td><td>400</td></tr><tr style="font-weight: bold;"><td>Total</td><td>150</td><td>450</td><td>600</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 120 / 150 = 80.0%<br>• Specificity = 370 / 450 = 82.2%<br>• PPV = 120 / 200 = 60.0%<br>• NPV = 370 / 400 = 92.5%` 
+        },
+        { 
+            question: `Dr. Allison monitors a cohort of 1,000 gym-goers over six months to see if consuming a "Radioactive Energy Drink" leads to "Neon Sweat." She records that 400 of the gym-goers consistently consume the radioactive drink (the exposed group). By the end of the study, 260 gym-goers in total have started glowing from Neon Sweat. Curiously, when she looks at the participants who stuck strictly to water, she finds that 60 of them still developed the condition. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: ["RR: 4.0, OR: 8.0", "RR: 5.0, OR: 9.0", "RR: 6.0, OR: 10.0", "RR: 4.5, OR: 7.5"], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: RR: 5.0, OR: 9.0</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 1000<br>• Exposed = 400, Unexposed = 600.<br>• Total Sick = 260.<br>• Sick & Unexposed = 60.<br>• Sick & Exposed = 260 - 60 = 200.<br>• Healthy & Exposed = 400 - 200 = 200.<br>• Healthy & Unexposed = 600 - 60 = 540.<br><table><tr><th></th><th>Neon Sweat (+)</th><th>Neon Sweat (-)</th><th>Total</th></tr><tr><td><strong>Energy Drink (+)</strong></td><td>200 (A)</td><td>200 (B)</td><td>400</td></tr><tr><td><strong>Water (-)</strong></td><td>60 (C)</td><td>540 (D)</td><td>600</td></tr><tr style="font-weight: bold;"><td>Total</td><td>260</td><td>740</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 200 / 400 = 0.50<br>• Risk (Unexposed) = 60 / 600 = 0.10<br>• Relative Risk (RR) = 0.50 / 0.10 = 5.0<br>• Odds Ratio (OR) = (200 × 540) / (200 × 60) = 108000 / 12000 = 9.0` 
+        },
+        { 
+            question: `Dr. Aria runs a case-control study investigating "Gargoyle Breath" in an ancient city. She studies 100 patients suffering from the condition (the cases) and 100 locals with fresh breath (the controls). She queries them about their consumption of a local delicacy, the "Stone-Mint." She discovers that 110 people in the entire study had eaten the Stone-Mint. Within the healthy control group, exactly 30 people admitted to eating the mint. <br><br>Determine the <strong>Odds Ratio (OR)</strong>.`, 
+            options: ["OR: 7.33", "OR: 8.50", "OR: 9.33", "OR: 10.0"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 9.33</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 100, Controls = 100<br>• Total Exposed = 110.<br>• Exposed Controls = 30.<br>• Unexposed Controls = 100 - 30 = 70.<br>• Exposed Cases = 110 - 30 = 80.<br>• Unexposed Cases = 100 - 80 = 20.<br><table><tr><th></th><th>Gargoyle Breath (Cases)</th><th>Fresh Breath (Controls)</th><th>Total</th></tr><tr><td><strong>Mint (+)</strong></td><td>80 (A)</td><td>30 (B)</td><td>110</td></tr><tr><td><strong>No Mint (-)</strong></td><td>20 (C)</td><td>70 (D)</td><td>90</td></tr><tr style="font-weight: bold;"><td>Total</td><td>100</td><td>100</td><td>200</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (80 × 70) / (30 × 20) = 5600 / 600 = 9.33` 
+        },
+        { 
+            question: `Dr. Allison evaluates a new "Rainbow-Swab" designed to detect "Unicorn Flu" in a clinical trial of 1,000 volunteers. She uses comprehensive blood work to verify that 300 of the volunteers truly have the virus. The Rainbow-Swab flags a total of 350 people as positive. When auditing the data, Dr. Allison is disappointed to see that the swab reacted to harmless throat bacteria in 110 completely healthy people, falsely reporting them as positive. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Rainbow-Swab.`, 
+            options: ["Sens: 84.3%, Spec: 80.0%, PPV: 90.8%, NPV: 68.6%", "Sens: 75.0%, Spec: 85.0%, PPV: 70.0%, NPV: 88.0%", "Sens: 80.0%, Spec: 84.3%, PPV: 68.6%, NPV: 90.8%", "Sens: 90.8%, Spec: 68.6%, PPV: 84.3%, NPV: 80.0%"], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 84.3%, PPV: 68.6%, NPV: 90.8%</strong><br><br><strong>Extracted Data:</strong><br>• Total volunteers = 1000<br>• Truly Sick = 300 (So, Truly Healthy = 700).<br>• Total Test Positive = 350.<br>• False Positives = 110.<br>• True Positives = 350 - 110 = 240.<br>• False Negatives = 300 - 240 = 60.<br>• True Negatives = 700 - 110 = 590.<br><table><tr><th></th><th>Unicorn Flu (+)</th><th>Unicorn Flu (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>240</td><td>110</td><td>350</td></tr><tr><td><strong>Test (-)</strong></td><td>60</td><td>590</td><td>650</td></tr><tr style="font-weight: bold;"><td>Total</td><td>300</td><td>700</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 240 / 300 = 80.0%<br>• Specificity = 590 / 700 = 84.3%<br>• PPV = 240 / 350 = 68.6%<br>• NPV = 590 / 650 = 90.8%` 
+        },
+
+        // --- BATCH 3 (Dr. Aria & Dr. Allison - Questions 21-30) ---
         { 
             question: `Dr. Aria tests a new screening device called the "Vibe-Check" to detect a caffeine-induced ailment known as "Jumping Bean Jitters." She rolls out the test to a sample of 1,000 office workers. Through meticulous gold-standard clinical interviews, she confirms that 250 of these workers truly have Jumping Bean Jitters. When all 1,000 workers are run through the Vibe-Check, the machine returns 300 positive results. However, reviewing the logs reveals that 50 of the workers who actually had the condition tested completely negative. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Vibe-Check.`, 
-            options: [
-                "Sens: 80.0%, Spec: 86.7%, PPV: 66.7%, NPV: 92.9%", 
-                "Sens: 86.7%, Spec: 80.0%, PPV: 92.9%, NPV: 66.7%", 
-                "Sens: 75.5%, Spec: 85.0%, PPV: 70.0%, NPV: 90.0%", 
-                "Sens: 90.0%, Spec: 75.5%, PPV: 60.0%, NPV: 85.0%"
-            ], 
+            options: ["Sens: 80.0%, Spec: 86.7%, PPV: 66.7%, NPV: 92.9%", "Sens: 86.7%, Spec: 80.0%, PPV: 92.9%, NPV: 66.7%", "Sens: 75.5%, Spec: 85.0%, PPV: 70.0%, NPV: 90.0%", "Sens: 90.0%, Spec: 75.5%, PPV: 60.0%, NPV: 85.0%"], 
             correctIndex: 0, 
-            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 86.7%, PPV: 66.7%, NPV: 92.9%</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total workers = 1000<br>
-            • Truly Sick = 250 (So, Truly Healthy = 750).<br>
-            • Total Test Positive = 300.<br>
-            • False Negatives (Missed the disease) = 50.<br>
-            • True Positives = 250 (total sick) - 50 = 200.<br>
-            • False Positives = 300 (total positive tests) - 200 = 100.<br>
-            • True Negatives = 750 (total healthy) - 100 = 650.<br>
-            <table>
-                <tr><th></th><th>Jitters (+)</th><th>Jitters (-)</th><th>Total</th></tr>
-                <tr><td><strong>Test (+)</strong></td><td>200</td><td>100</td><td>300</td></tr>
-                <tr><td><strong>Test (-)</strong></td><td>50</td><td>650</td><td>700</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>250</td><td>750</td><td>1000</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Sensitivity = 200 / 250 = 80.0%<br>
-            • Specificity = 650 / 750 = 86.7%<br>
-            • PPV = 200 / 300 = 66.7%<br>
-            • NPV = 650 / 700 = 92.9%` 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 86.7%, PPV: 66.7%, NPV: 92.9%</strong><br><br><strong>Extracted Data:</strong><br>• Total workers = 1000<br>• Truly Sick = 250 (So, Truly Healthy = 750).<br>• Total Test Positive = 300.<br>• False Negatives = 50.<br>• True Positives = 250 - 50 = 200.<br>• False Positives = 300 - 200 = 100.<br>• True Negatives = 750 - 100 = 650.<br><table><tr><th></th><th>Jitters (+)</th><th>Jitters (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>200</td><td>100</td><td>300</td></tr><tr><td><strong>Test (-)</strong></td><td>50</td><td>650</td><td>700</td></tr><tr style="font-weight: bold;"><td>Total</td><td>250</td><td>750</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 200 / 250 = 80.0%<br>• Specificity = 650 / 750 = 86.7%<br>• PPV = 200 / 300 = 66.7%<br>• NPV = 650 / 700 = 92.9%` 
         },
         { 
             question: `Dr. Allison conducts a cohort study at an amusement park to determine if eating "Pink Cloud Fluff" results in a chronic "Cotton Candy Cough." She follows 800 park attendees. She notes that 300 attendees gorged on the Pink Cloud Fluff (the exposed group), while the remaining 500 steered clear. Over the next month, 180 attendees in total reported having the Cotton Candy Cough. Surprisingly, 60 of the attendees who developed the cough had never eaten the fluff. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
-            options: [
-                "RR: 3.33, OR: 4.89", 
-                "RR: 4.89, OR: 3.33", 
-                "RR: 2.50, OR: 5.50", 
-                "RR: 4.00, OR: 6.25"
-            ], 
+            options: ["RR: 3.33, OR: 4.89", "RR: 4.89, OR: 3.33", "RR: 2.50, OR: 5.50", "RR: 4.00, OR: 6.25"], 
             correctIndex: 0, 
-            explanation: `<strong>Correct Answer: RR: 3.33, OR: 4.89</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total cohort = 800<br>
-            • Exposed = 300 (So, Unexposed = 500).<br>
-            • Total Sick = 180.<br>
-            • Sick & Unexposed = 60.<br>
-            • Sick & Exposed = 180 (total sick) - 60 = 120.<br>
-            • Healthy & Exposed = 300 (total exposed) - 120 = 180.<br>
-            • Healthy & Unexposed = 500 (total unexposed) - 60 = 440.<br>
-            <table>
-                <tr><th></th><th>Cotton Candy Cough (+)</th><th>Cotton Candy Cough (-)</th><th>Total</th></tr>
-                <tr><td><strong>Ate Fluff (+)</strong></td><td>120 (A)</td><td>180 (B)</td><td>300</td></tr>
-                <tr><td><strong>No Fluff (-)</strong></td><td>60 (C)</td><td>440 (D)</td><td>500</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>180</td><td>620</td><td>800</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Risk (Exposed) = 120 / 300 = 0.40<br>
-            • Risk (Unexposed) = 60 / 500 = 0.12<br>
-            • Relative Risk (RR) = 0.40 / 0.12 = 3.33<br>
-            • Odds Ratio (OR) = (120 × 440) / (180 × 60) = 52800 / 10800 = 4.89` 
+            explanation: `<strong>Correct Answer: RR: 3.33, OR: 4.89</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 800<br>• Exposed = 300, Unexposed = 500.<br>• Total Sick = 180.<br>• Sick & Unexposed = 60.<br>• Sick & Exposed = 180 - 60 = 120.<br>• Healthy & Exposed = 300 - 120 = 180.<br>• Healthy & Unexposed = 500 - 60 = 440.<br><table><tr><th></th><th>Cotton Candy Cough (+)</th><th>Cotton Candy Cough (-)</th><th>Total</th></tr><tr><td><strong>Ate Fluff (+)</strong></td><td>120 (A)</td><td>180 (B)</td><td>300</td></tr><tr><td><strong>No Fluff (-)</strong></td><td>60 (C)</td><td>440 (D)</td><td>500</td></tr><tr style="font-weight: bold;"><td>Total</td><td>180</td><td>620</td><td>800</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 120 / 300 = 0.40<br>• Risk (Unexposed) = 60 / 500 = 0.12<br>• Relative Risk (RR) = 0.40 / 0.12 = 3.33<br>• Odds Ratio (OR) = (120 × 440) / (180 × 60) = 52800 / 10800 = 4.89` 
         },
         { 
             question: `Dr. Aria initiates a case-control study to investigate "Square Eyes" syndrome. She recruits 200 teenagers currently suffering from Square Eyes (the cases) and 200 teenagers with perfect vision (the controls). She investigates their habits to see if they had spent the summer binge-watching 90s sitcoms. Her survey reveals that 220 participants across the whole study had been binge-watching. When analyzing the healthy control group, she finds that 60 of them had also binge-watched the sitcoms. <br><br>Based on this study design, calculate the <strong>Odds Ratio (OR)</strong>.`, 
-            options: [
-                "OR: 7.25", 
-                "OR: 8.50", 
-                "OR: 9.33", 
-                "OR: 10.50"
-            ], 
+            options: ["OR: 7.25", "OR: 8.50", "OR: 9.33", "OR: 10.50"], 
             correctIndex: 2, 
-            explanation: `<strong>Correct Answer: OR: 9.33</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Cases (Disease +) = 200<br>
-            • Controls (Disease -) = 200<br>
-            • Total Exposed (Binge-watched) = 220.<br>
-            • Exposed Controls = 60.<br>
-            • Unexposed Controls = 200 - 60 = 140.<br>
-            • Exposed Cases = 220 (total exposed) - 60 (exposed controls) = 160.<br>
-            • Unexposed Cases = 200 (total cases) - 160 = 40.<br>
-            <table>
-                <tr><th></th><th>Square Eyes (Cases)</th><th>Perfect Vision (Controls)</th><th>Total</th></tr>
-                <tr><td><strong>Binge-watched (+)</strong></td><td>160 (A)</td><td>60 (B)</td><td>220</td></tr>
-                <tr><td><strong>Did Not Binge (-)</strong></td><td>40 (C)</td><td>140 (D)</td><td>180</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>200</td><td>200</td><td>400</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Odds Ratio (OR) = (A × D) / (B × C) = (160 × 140) / (60 × 40) = 22400 / 2400 = 9.33` 
+            explanation: `<strong>Correct Answer: OR: 9.33</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 200, Controls = 200<br>• Total Exposed = 220.<br>• Exposed Controls = 60.<br>• Unexposed Controls = 200 - 60 = 140.<br>• Exposed Cases = 220 - 60 = 160.<br>• Unexposed Cases = 200 - 160 = 40.<br><table><tr><th></th><th>Square Eyes (Cases)</th><th>Perfect Vision (Controls)</th><th>Total</th></tr><tr><td><strong>Binge-watched (+)</strong></td><td>160 (A)</td><td>60 (B)</td><td>220</td></tr><tr><td><strong>Did Not Binge (-)</strong></td><td>40 (C)</td><td>140 (D)</td><td>180</td></tr><tr style="font-weight: bold;"><td>Total</td><td>200</td><td>200</td><td>400</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (160 × 140) / (60 × 40) = 22400 / 2400 = 9.33` 
         },
         { 
             question: `Dr. Allison is testing a new "Garlic-Sniff" diagnostic tool to screen for "Vampire Fangs" at an alternative dentistry clinic. She conducts a trial on 1,200 volunteers. Dental x-rays confirm that exactly 100 of these volunteers secretly have the fangs. The Garlic-Sniff test ends up flagging 200 people as positive overall. When auditing the results, Dr. Allison discovers that the test falsely triggered a positive result for 120 completely normal, fangless volunteers. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Garlic-Sniff test.`, 
-            options: [
-                "Sens: 80.0%, Spec: 89.1%, PPV: 40.0%, NPV: 98.0%", 
-                "Sens: 89.1%, Spec: 80.0%, PPV: 98.0%, NPV: 40.0%", 
-                "Sens: 75.0%, Spec: 92.5%, PPV: 50.0%, NPV: 95.0%", 
-                "Sens: 85.0%, Spec: 85.0%, PPV: 45.0%, NPV: 90.0%"
-            ], 
+            options: ["Sens: 80.0%, Spec: 89.1%, PPV: 40.0%, NPV: 98.0%", "Sens: 89.1%, Spec: 80.0%, PPV: 98.0%, NPV: 40.0%", "Sens: 75.0%, Spec: 92.5%, PPV: 50.0%, NPV: 95.0%", "Sens: 85.0%, Spec: 85.0%, PPV: 45.0%, NPV: 90.0%"], 
             correctIndex: 0, 
-            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 89.1%, PPV: 40.0%, NPV: 98.0%</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total volunteers = 1200<br>
-            • Truly Sick = 100 (So, Truly Healthy = 1100).<br>
-            • Total Test Positive = 200.<br>
-            • False Positives = 120.<br>
-            • True Positives = 200 (total test positive) - 120 = 80.<br>
-            • False Negatives = 100 (total sick) - 80 = 20.<br>
-            • True Negatives = 1100 (total healthy) - 120 = 980.<br>
-            <table>
-                <tr><th></th><th>Vampire Fangs (+)</th><th>Vampire Fangs (-)</th><th>Total</th></tr>
-                <tr><td><strong>Test (+)</strong></td><td>80</td><td>120</td><td>200</td></tr>
-                <tr><td><strong>Test (-)</strong></td><td>20</td><td>980</td><td>1000</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>100</td><td>1100</td><td>1200</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Sensitivity = 80 / 100 = 80.0%<br>
-            • Specificity = 980 / 1100 = 89.1%<br>
-            • PPV = 80 / 200 = 40.0%<br>
-            • NPV = 980 / 1000 = 98.0%` 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 89.1%, PPV: 40.0%, NPV: 98.0%</strong><br><br><strong>Extracted Data:</strong><br>• Total volunteers = 1200<br>• Truly Sick = 100 (So, Truly Healthy = 1100).<br>• Total Test Positive = 200.<br>• False Positives = 120.<br>• True Positives = 200 - 120 = 80.<br>• False Negatives = 100 - 80 = 20.<br>• True Negatives = 1100 - 120 = 980.<br><table><tr><th></th><th>Vampire Fangs (+)</th><th>Vampire Fangs (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>80</td><td>120</td><td>200</td></tr><tr><td><strong>Test (-)</strong></td><td>20</td><td>980</td><td>1000</td></tr><tr style="font-weight: bold;"><td>Total</td><td>100</td><td>1100</td><td>1200</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 80 / 100 = 80.0%<br>• Specificity = 980 / 1100 = 89.1%<br>• PPV = 80 / 200 = 40.0%<br>• NPV = 980 / 1000 = 98.0%` 
         },
         { 
             question: `Dr. Aria leads a cohort study tracking 1,000 citizens to determine if wearing "Anti-Gravity Boots" results in developing "Hovercraft Heels." During her observation, she notes that 400 citizens buy and wear the boots (the exposed group). By the end of the year, 250 citizens have developed Hovercraft Heels. Upon reviewing their shopping histories, she finds that 200 of the afflicted citizens had indeed worn the boots. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
-            options: [
-                "RR: 3.5, OR: 7.0", 
-                "RR: 4.0, OR: 8.5", 
-                "RR: 6.0, OR: 11.0", 
-                "RR: 5.5, OR: 10.0"
-            ], 
+            options: ["RR: 3.5, OR: 7.0", "RR: 4.0, OR: 8.5", "RR: 6.0, OR: 11.0", "RR: 5.5, OR: 10.0"], 
             correctIndex: 2, 
-            explanation: `<strong>Correct Answer: RR: 6.0, OR: 11.0</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total cohort = 1000<br>
-            • Exposed = 400 (So, Unexposed = 600).<br>
-            • Total Sick = 250.<br>
-            • Sick & Exposed = 200.<br>
-            • Healthy & Exposed = 400 (total exposed) - 200 = 200.<br>
-            • Sick & Unexposed = 250 (total sick) - 200 = 50.<br>
-            • Healthy & Unexposed = 600 (total unexposed) - 50 = 550.<br>
-            <table>
-                <tr><th></th><th>Hovercraft Heels (+)</th><th>Hovercraft Heels (-)</th><th>Total</th></tr>
-                <tr><td><strong>Wore Boots (+)</strong></td><td>200 (A)</td><td>200 (B)</td><td>400</td></tr>
-                <tr><td><strong>No Boots (-)</strong></td><td>50 (C)</td><td>550 (D)</td><td>600</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>250</td><td>750</td><td>1000</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Risk (Exposed) = 200 / 400 = 0.50<br>
-            • Risk (Unexposed) = 50 / 600 = 0.0833<br>
-            • Relative Risk (RR) = 0.50 / 0.0833 = 6.0<br>
-            • Odds Ratio (OR) = (200 × 550) / (200 × 50) = 110000 / 10000 = 11.0` 
+            explanation: `<strong>Correct Answer: RR: 6.0, OR: 11.0</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 1000<br>• Exposed = 400, Unexposed = 600.<br>• Total Sick = 250.<br>• Sick & Exposed = 200.<br>• Healthy & Exposed = 400 - 200 = 200.<br>• Sick & Unexposed = 250 - 200 = 50.<br>• Healthy & Unexposed = 600 - 50 = 550.<br><table><tr><th></th><th>Hovercraft Heels (+)</th><th>Hovercraft Heels (-)</th><th>Total</th></tr><tr><td><strong>Wore Boots (+)</strong></td><td>200 (A)</td><td>200 (B)</td><td>400</td></tr><tr><td><strong>No Boots (-)</strong></td><td>50 (C)</td><td>550 (D)</td><td>600</td></tr><tr style="font-weight: bold;"><td>Total</td><td>250</td><td>750</td><td>1000</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 200 / 400 = 0.50<br>• Risk (Unexposed) = 50 / 600 = 0.0833<br>• Relative Risk (RR) = 0.50 / 0.0833 = 6.0<br>• Odds Ratio (OR) = (200 × 550) / (200 × 50) = 110000 / 10000 = 11.0` 
         },
         { 
             question: `Dr. Allison conducts a case-control study investigating "Cactus Hugger's Rash" among hikers. She recruits 150 individuals currently suffering from the rash (the cases) and 150 individuals with clear skin (the controls). She investigates whether they recently participated in the controversial "Blindfolded Desert Hike." Across both groups, 130 participants had indeed done the blindfolded hike. Dr. Allison finds that 110 people in the healthy control group had avoided the blindfolded hike completely. <br><br>Based on this study, calculate the <strong>Odds Ratio (OR)</strong>.`, 
-            options: [
-                "OR: 2.50", 
-                "OR: 3.85", 
-                "OR: 4.13", 
-                "OR: 5.00"
-            ], 
+            options: ["OR: 2.50", "OR: 3.85", "OR: 4.13", "OR: 5.00"], 
             correctIndex: 2, 
-            explanation: `<strong>Correct Answer: OR: 4.13</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Cases (Disease +) = 150<br>
-            • Controls (Disease -) = 150<br>
-            • Total Exposed (Did Hike) = 130.<br>
-            • Unexposed Controls = 110.<br>
-            • Exposed Controls = 150 (total controls) - 110 = 40.<br>
-            • Exposed Cases = 130 (total exposed) - 40 (exposed controls) = 90.<br>
-            • Unexposed Cases = 150 (total cases) - 90 = 60.<br>
-            <table>
-                <tr><th></th><th>Cactus Rash (Cases)</th><th>Clear Skin (Controls)</th><th>Total</th></tr>
-                <tr><td><strong>Did Hike (+)</strong></td><td>90 (A)</td><td>40 (B)</td><td>130</td></tr>
-                <tr><td><strong>No Hike (-)</strong></td><td>60 (C)</td><td>110 (D)</td><td>170</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>150</td><td>150</td><td>300</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Odds Ratio (OR) = (A × D) / (B × C) = (90 × 110) / (40 × 60) = 9900 / 2400 = 4.125 (Rounds to 4.13)` 
+            explanation: `<strong>Correct Answer: OR: 4.13</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 150, Controls = 150<br>• Total Exposed = 130.<br>• Unexposed Controls = 110.<br>• Exposed Controls = 150 - 110 = 40.<br>• Exposed Cases = 130 - 40 = 90.<br>• Unexposed Cases = 150 - 90 = 60.<br><table><tr><th></th><th>Cactus Rash (Cases)</th><th>Clear Skin (Controls)</th><th>Total</th></tr><tr><td><strong>Did Hike (+)</strong></td><td>90 (A)</td><td>40 (B)</td><td>130</td></tr><tr><td><strong>No Hike (-)</strong></td><td>60 (C)</td><td>110 (D)</td><td>170</td></tr><tr style="font-weight: bold;"><td>Total</td><td>150</td><td>150</td><td>300</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (90 × 110) / (40 × 60) = 9900 / 2400 = 4.125 (Rounds to 4.13)` 
         },
         { 
             question: `Dr. Aria uses an advanced 'Pixel-Peeper' diagnostic program to test 800 tech employees for a visual defect called "Glitchy Hologram Syndrome." Through deep optometry exams, she is certain that 200 of these employees truly have the condition. The Pixel-Peeper yields 180 positive results overall. However, Dr. Aria finds a calibration error: 40 employees who actually suffer from the condition passed the test and were marked negative. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Pixel-Peeper.`, 
-            options: [
-                "Sens: 75.0%, Spec: 90.0%, PPV: 85.0%, NPV: 90.0%", 
-                "Sens: 80.0%, Spec: 96.7%, PPV: 88.9%, NPV: 93.5%", 
-                "Sens: 88.9%, Spec: 93.5%, PPV: 80.0%, NPV: 96.7%", 
-                "Sens: 90.0%, Spec: 85.5%, PPV: 75.0%, NPV: 85.0%"
-            ], 
+            options: ["Sens: 75.0%, Spec: 90.0%, PPV: 85.0%, NPV: 90.0%", "Sens: 80.0%, Spec: 96.7%, PPV: 88.9%, NPV: 93.5%", "Sens: 88.9%, Spec: 93.5%, PPV: 80.0%, NPV: 96.7%", "Sens: 90.0%, Spec: 85.5%, PPV: 75.0%, NPV: 85.0%"], 
             correctIndex: 1, 
-            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 96.7%, PPV: 88.9%, NPV: 93.5%</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total employees = 800<br>
-            • Truly Sick = 200 (So, Truly Healthy = 600).<br>
-            • Total Test Positive = 180.<br>
-            • False Negatives (Missed disease) = 40.<br>
-            • True Positives = 200 (total sick) - 40 = 160.<br>
-            • False Positives = 180 (total positive) - 160 = 20.<br>
-            • True Negatives = 600 (total healthy) - 20 = 580.<br>
-            <table>
-                <tr><th></th><th>Glitchy Hologram (+)</th><th>Glitchy Hologram (-)</th><th>Total</th></tr>
-                <tr><td><strong>Test (+)</strong></td><td>160</td><td>20</td><td>180</td></tr>
-                <tr><td><strong>Test (-)</strong></td><td>40</td><td>580</td><td>620</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>200</td><td>600</td><td>800</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Sensitivity = 160 / 200 = 80.0%<br>
-            • Specificity = 580 / 600 = 96.7%<br>
-            • PPV = 160 / 180 = 88.9%<br>
-            • NPV = 580 / 620 = 93.5%` 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 96.7%, PPV: 88.9%, NPV: 93.5%</strong><br><br><strong>Extracted Data:</strong><br>• Total employees = 800<br>• Truly Sick = 200 (So, Truly Healthy = 600).<br>• Total Test Positive = 180.<br>• False Negatives = 40.<br>• True Positives = 200 - 40 = 160.<br>• False Positives = 180 - 160 = 20.<br>• True Negatives = 600 - 20 = 580.<br><table><tr><th></th><th>Glitchy Hologram (+)</th><th>Glitchy Hologram (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>160</td><td>20</td><td>180</td></tr><tr><td><strong>Test (-)</strong></td><td>40</td><td>580</td><td>620</td></tr><tr style="font-weight: bold;"><td>Total</td><td>200</td><td>600</td><td>800</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 160 / 200 = 80.0%<br>• Specificity = 580 / 600 = 96.7%<br>• PPV = 160 / 180 = 88.9%<br>• NPV = 580 / 620 = 93.5%` 
         },
         { 
             question: `Dr. Allison monitors a cohort of 600 summer campers to see if swimming in the off-limits "Ooze Pool" leads to "Slime Sweat." She records that 200 campers broke the rules and swam in the pool (the exposed group). By the end of camp, 180 campers in total started sweating slime. Curiously, when she reviews the camp counselors' logs, she finds that 80 of the campers who got sick had strictly stayed in the normal pool and never touched the ooze. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
-            options: [
-                "RR: 3.0, OR: 5.5", 
-                "RR: 2.5, OR: 4.0", 
-                "RR: 4.0, OR: 2.5", 
-                "RR: 3.5, OR: 6.0"
-            ], 
+            options: ["RR: 3.0, OR: 5.5", "RR: 2.5, OR: 4.0", "RR: 4.0, OR: 2.5", "RR: 3.5, OR: 6.0"], 
             correctIndex: 1, 
-            explanation: `<strong>Correct Answer: RR: 2.5, OR: 4.0</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total cohort = 600<br>
-            • Exposed = 200 (So, Unexposed = 400).<br>
-            • Total Sick = 180.<br>
-            • Sick & Unexposed = 80.<br>
-            • Sick & Exposed = 180 (total sick) - 80 = 100.<br>
-            • Healthy & Exposed = 200 (total exposed) - 100 = 100.<br>
-            • Healthy & Unexposed = 400 (total unexposed) - 80 = 320.<br>
-            <table>
-                <tr><th></th><th>Slime Sweat (+)</th><th>Slime Sweat (-)</th><th>Total</th></tr>
-                <tr><td><strong>Ooze Pool (+)</strong></td><td>100 (A)</td><td>100 (B)</td><td>200</td></tr>
-                <tr><td><strong>Normal Pool (-)</strong></td><td>80 (C)</td><td>320 (D)</td><td>400</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>180</td><td>420</td><td>600</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Risk (Exposed) = 100 / 200 = 0.50<br>
-            • Risk (Unexposed) = 80 / 400 = 0.20<br>
-            • Relative Risk (RR) = 0.50 / 0.20 = 2.5<br>
-            • Odds Ratio (OR) = (100 × 320) / (100 × 80) = 32000 / 8000 = 4.0` 
+            explanation: `<strong>Correct Answer: RR: 2.5, OR: 4.0</strong><br><br><strong>Extracted Data:</strong><br>• Total cohort = 600<br>• Exposed = 200, Unexposed = 400.<br>• Total Sick = 180.<br>• Sick & Unexposed = 80.<br>• Sick & Exposed = 180 - 80 = 100.<br>• Healthy & Exposed = 200 - 100 = 100.<br>• Healthy & Unexposed = 400 - 80 = 320.<br><table><tr><th></th><th>Slime Sweat (+)</th><th>Slime Sweat (-)</th><th>Total</th></tr><tr><td><strong>Ooze Pool (+)</strong></td><td>100 (A)</td><td>100 (B)</td><td>200</td></tr><tr><td><strong>Normal Pool (-)</strong></td><td>80 (C)</td><td>320 (D)</td><td>400</td></tr><tr style="font-weight: bold;"><td>Total</td><td>180</td><td>420</td><td>600</td></tr></table><strong>Calculations:</strong><br>• Risk (Exposed) = 100 / 200 = 0.50<br>• Risk (Unexposed) = 80 / 400 = 0.20<br>• Relative Risk (RR) = 0.50 / 0.20 = 2.5<br>• Odds Ratio (OR) = (100 × 320) / (100 × 80) = 32000 / 8000 = 4.0` 
         },
         { 
             question: `Dr. Aria runs a case-control study investigating "Werewolf Howl" syndrome in an isolated mountain town. She studies 250 patients suffering from the condition (the cases) and 250 locals who never howl (the controls). She queries them about their consumption of a local delicacy, the "Moon-Cheese." She discovers that 250 people in the entire study had eaten the cheese. Within the healthy control group, exactly 50 people admitted to eating the cheese. <br><br>Determine the <strong>Odds Ratio (OR)</strong>.`, 
-            options: [
-                "OR: 8.0", 
-                "OR: 12.0", 
-                "OR: 16.0", 
-                "OR: 20.0"
-            ], 
+            options: ["OR: 8.0", "OR: 12.0", "OR: 16.0", "OR: 20.0"], 
             correctIndex: 2, 
-            explanation: `<strong>Correct Answer: OR: 16.0</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Cases (Disease +) = 250<br>
-            • Controls (Disease -) = 250<br>
-            • Total Exposed (Ate Cheese) = 250.<br>
-            • Exposed Controls = 50.<br>
-            • Unexposed Controls = 250 - 50 = 200.<br>
-            • Exposed Cases = 250 (total exposed) - 50 (exposed controls) = 200.<br>
-            • Unexposed Cases = 250 (total cases) - 200 = 50.<br>
-            <table>
-                <tr><th></th><th>Werewolf Howl (Cases)</th><th>No Howl (Controls)</th><th>Total</th></tr>
-                <tr><td><strong>Moon-Cheese (+)</strong></td><td>200 (A)</td><td>50 (B)</td><td>250</td></tr>
-                <tr><td><strong>No Cheese (-)</strong></td><td>50 (C)</td><td>200 (D)</td><td>250</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>250</td><td>250</td><td>500</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Odds Ratio (OR) = (A × D) / (B × C) = (200 × 200) / (50 × 50) = 40000 / 2500 = 16.0` 
+            explanation: `<strong>Correct Answer: OR: 16.0</strong><br><br><strong>Extracted Data:</strong><br>• Cases = 250, Controls = 250<br>• Total Exposed = 250.<br>• Exposed Controls = 50.<br>• Unexposed Controls = 250 - 50 = 200.<br>• Exposed Cases = 250 - 50 = 200.<br>• Unexposed Cases = 250 - 200 = 50.<br><table><tr><th></th><th>Werewolf Howl (Cases)</th><th>No Howl (Controls)</th><th>Total</th></tr><tr><td><strong>Moon-Cheese (+)</strong></td><td>200 (A)</td><td>50 (B)</td><td>250</td></tr><tr><td><strong>No Cheese (-)</strong></td><td>50 (C)</td><td>200 (D)</td><td>250</td></tr><tr style="font-weight: bold;"><td>Total</td><td>250</td><td>250</td><td>500</td></tr></table><strong>Calculations:</strong><br>• Odds Ratio (OR) = (200 × 200) / (50 × 50) = 40000 / 2500 = 16.0` 
         },
         { 
             question: `Dr. Allison evaluates a new "Toadstool-Scanner" designed to detect "Gnome Hat Growth" in a clinical trial of 1,500 forest volunteers. She uses precise measurements to verify that 300 of the volunteers truly have a tiny hat growing under their hair. The Toadstool-Scanner flags a total of 400 people as positive. When auditing the data, Dr. Allison finds that the scanner reacted to thick hair gel in 150 completely healthy people, falsely reporting them as positive. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Toadstool-Scanner.`, 
-            options: [
-                "Sens: 75.0%, Spec: 90.0%, PPV: 60.0%, NPV: 85.0%", 
-                "Sens: 83.3%, Spec: 87.5%, PPV: 62.5%, NPV: 95.5%", 
-                "Sens: 87.5%, Spec: 83.3%, PPV: 95.5%, NPV: 62.5%", 
-                "Sens: 80.0%, Spec: 85.0%, PPV: 70.0%, NPV: 90.0%"
-            ], 
+            options: ["Sens: 75.0%, Spec: 90.0%, PPV: 60.0%, NPV: 85.0%", "Sens: 83.3%, Spec: 87.5%, PPV: 62.5%, NPV: 95.5%", "Sens: 87.5%, Spec: 83.3%, PPV: 95.5%, NPV: 62.5%", "Sens: 80.0%, Spec: 85.0%, PPV: 70.0%, NPV: 90.0%"], 
             correctIndex: 1, 
-            explanation: `<strong>Correct Answer: Sens: 83.3%, Spec: 87.5%, PPV: 62.5%, NPV: 95.5%</strong><br><br>
-            <strong>Extracted Data:</strong><br>
-            • Total volunteers = 1500<br>
-            • Truly Sick = 300 (So, Truly Healthy = 1200).<br>
-            • Total Test Positive = 400.<br>
-            • False Positives = 150.<br>
-            • True Positives = 400 (total test positive) - 150 = 250.<br>
-            • False Negatives = 300 (total sick) - 250 = 50.<br>
-            • True Negatives = 1200 (total healthy) - 150 = 1050.<br>
-            <table>
-                <tr><th></th><th>Gnome Hat (+)</th><th>Gnome Hat (-)</th><th>Total</th></tr>
-                <tr><td><strong>Test (+)</strong></td><td>250</td><td>150</td><td>400</td></tr>
-                <tr><td><strong>Test (-)</strong></td><td>50</td><td>1050</td><td>1100</td></tr>
-                <tr style="font-weight: bold;"><td>Total</td><td>300</td><td>1200</td><td>1500</td></tr>
-            </table>
-            <strong>Calculations:</strong><br>
-            • Sensitivity = 250 / 300 = 83.3%<br>
-            • Specificity = 1050 / 1200 = 87.5%<br>
-            • PPV = 250 / 400 = 62.5%<br>
-            • NPV = 1050 / 1100 = 95.5%` 
+            explanation: `<strong>Correct Answer: Sens: 83.3%, Spec: 87.5%, PPV: 62.5%, NPV: 95.5%</strong><br><br><strong>Extracted Data:</strong><br>• Total volunteers = 1500<br>• Truly Sick = 300 (So, Truly Healthy = 1200).<br>• Total Test Positive = 400.<br>• False Positives = 150.<br>• True Positives = 400 - 150 = 250.<br>• False Negatives = 300 - 250 = 50.<br>• True Negatives = 1200 - 150 = 1050.<br><table><tr><th></th><th>Gnome Hat (+)</th><th>Gnome Hat (-)</th><th>Total</th></tr><tr><td><strong>Test (+)</strong></td><td>250</td><td>150</td><td>400</td></tr><tr><td><strong>Test (-)</strong></td><td>50</td><td>1050</td><td>1100</td></tr><tr style="font-weight: bold;"><td>Total</td><td>300</td><td>1200</td><td>1500</td></tr></table><strong>Calculations:</strong><br>• Sensitivity = 250 / 300 = 83.3%<br>• Specificity = 1050 / 1200 = 87.5%<br>• PPV = 250 / 400 = 62.5%<br>• NPV = 1050 / 1100 = 95.5%` 
         }
     ];
 
@@ -482,15 +266,11 @@
             endTest();
             return;
         }
-
         const q = randomizedQuestions[currentQuestionIndex];
-        
         document.getElementById('question-number').innerText = `Question ${currentQuestionIndex + 1} of ${randomizedQuestions.length}`;
         document.getElementById('question-text').innerHTML = q.question;
-        
         const optionsDiv = document.getElementById('options');
         optionsDiv.innerHTML = ''; 
-        
         q.options.forEach((optText, index) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
@@ -498,7 +278,6 @@
             btn.onclick = () => checkAnswer(index, btn);
             optionsDiv.appendChild(btn);
         });
-
         document.getElementById('feedback-container').style.display = 'none';
         document.getElementById('next-btn').style.display = 'none';
     }
@@ -506,9 +285,7 @@
     function checkAnswer(selectedIndex, btnElement) {
         const q = randomizedQuestions[currentQuestionIndex];
         const allBtns = document.querySelectorAll('.option-btn');
-        
         allBtns.forEach(btn => btn.disabled = true);
-
         if (selectedIndex === q.correctIndex) {
             btnElement.classList.add('correct');
             score++;
@@ -516,14 +293,12 @@
             btnElement.classList.add('wrong');
             allBtns[q.correctIndex].classList.add('correct');
         }
-
         questionsAnswered++;
-        updateScoreBoard();
-
+        document.getElementById('score').innerText = score;
+        document.getElementById('total-answered').innerText = questionsAnswered;
         const feedbackDiv = document.getElementById('feedback-container');
         feedbackDiv.innerHTML = q.explanation;
         feedbackDiv.style.display = 'block';
-
         document.getElementById('next-btn').style.display = 'block';
     }
 
@@ -532,26 +307,18 @@
         loadQuestion();
     }
 
-    function updateScoreBoard() {
-        document.getElementById('score').innerText = score;
-        document.getElementById('total-answered').innerText = questionsAnswered;
-    }
-
     function endTest() {
         document.getElementById('quiz-screen').style.display = 'none';
         document.getElementById('results-screen').style.display = 'block';
-        
         let percentage = 0;
         if (questionsAnswered > 0) {
             percentage = Math.round((score / questionsAnswered) * 100);
         }
-        
         document.getElementById('final-total').innerText = questionsAnswered;
         document.getElementById('final-score').innerText = percentage;
     }
 
     window.onload = startTest;
 </script>
-
 </body>
 </html>
