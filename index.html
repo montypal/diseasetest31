@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Aria & Dr. Allison's Biostats Exam</title>
+    <title>Dr. Aria & Dr. Allison's Biostats Exam (Part 3)</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,7 +16,7 @@
         }
         #app-container {
             background: #fff;
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             padding: 30px;
             border-radius: 10px;
@@ -40,17 +40,17 @@
             margin-bottom: 5px;
         }
         .question-text {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 1.15em;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         .option-btn {
-            padding: 12px 20px;
+            padding: 14px 20px;
             font-size: 1em;
             background-color: #ecf0f1;
             border: 2px solid #bdc3c7;
@@ -82,6 +82,23 @@
             border-left: 5px solid #3498db;
             display: none;
             line-height: 1.6;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #ecf0f1;
+            font-weight: bold;
         }
         .controls {
             margin-top: 30px;
@@ -148,56 +165,297 @@
 
 <script>
     const questionsData = [
-        { question: "Dr. Aria tests 500 people for 'Glitter Lung' using the Sparkle-Scan. <br><br>• 100 truly have Glitter Lung.<br>• 400 do not.<br>• Among those with the disease, 80 test positive.<br><br>What is the <strong>Sensitivity</strong> of the Sparkle-Scan?", options: ["80%", "20%", "25%", "75%"], correctIndex: 0, explanation: "<strong>Correct Answer: 80%</strong><br><br>Sensitivity looks ONLY at people who actually have the disease. It is the ability to correctly identify them.<br>• True Positives (TP) = 80<br>• False Negatives (FN) = 20<br>• Formula: TP / (TP + FN) = 80 / 100 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Allison investigates a 'Yeti Syndrome' outbreak. She develops a Hair-Analyzer test. She tests 200 children:<br><br>• 50 truly have Yeti Syndrome.<br>• 150 do not.<br>• Among those WITHOUT the syndrome, 120 test negative and 30 test positive.<br><br>What is the <strong>Specificity</strong> of the Hair-Analyzer?", options: ["60%", "80%", "25%", "100%"], correctIndex: 1, explanation: "<strong>Correct Answer: 80%</strong><br><br>Specificity looks ONLY at people who do NOT have the disease.<br>• True Negatives (TN) = 120<br>• False Positives (FP) = 30<br>• Formula: TN / (TN + FP) = 120 / 150 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Aria is using the 'Brain-Hunger Screen' for Zombie Virus. <br><br>• 100 people test positive in total.<br>• Of those 100 positive tests, only 60 actually have the Zombie Virus.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["40%", "100%", "60%", "Cannot be determined"], correctIndex: 2, explanation: "<strong>Correct Answer: 60%</strong><br><br>PPV answers: 'If I test positive, what are the chances I actually have the disease?'<br>• True Positives (TP) = 60<br>• Total Positive Tests = 100<br>• Formula: TP / Total Positives = 60 / 100 = 0.60 or <strong>60%</strong>." },
-        { question: "Dr. Allison conducts a cohort study on eating 'Radioactive Tacos' and developing 'Glowing Teeth'.<br><br>• 100 ate the tacos (Exposed): 40 got glowing teeth.<br>• 200 did not eat tacos (Unexposed): 20 got glowing teeth.<br><br>What is the <strong>Relative Risk (RR)</strong> of getting glowing teeth if you eat the tacos?", options: ["1.5", "2.0", "4.0", "8.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 4.0</strong><br><br>Relative Risk compares the risk in the exposed vs. unexposed.<br>• Risk in Exposed: 40 / 100 = 0.40 (40%)<br>• Risk in Unexposed: 20 / 200 = 0.10 (10%)<br>• Formula: Risk(Exposed) / Risk(Unexposed) = 0.40 / 0.10 = <strong>4.0</strong>." },
-        { question: "Dr. Aria does a case-control study on 'Disco Fever'. She looks at 50 Cases and 50 Controls.<br><br>• Cases: 40 wore polyester pants, 10 did not.<br>• Controls: 20 wore polyester pants, 30 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong> for wearing polyester pants and having Disco Fever?", options: ["6.0", "2.0", "4.0", "0.5"], correctIndex: 0, explanation: "<strong>Correct Answer: 6.0</strong><br><br>Odds Ratio compares exposure odds in cases to controls.<br>• Odds of exposure in cases: 40 / 10 = 4.0<br>• Odds of exposure in controls: 20 / 30 = 0.666...<br>• Formula: (40 * 30) / (10 * 20) = 1200 / 200 = <strong>6.0</strong>." },
-        { question: "Dr. Aria develops the 'Tickle-Test' for 'Giggle Pox'.<br><br>• 100 children truly have Giggle Pox.<br>• 200 do not.<br>• Of the children who actually have Giggle Pox, 90 test positive.<br><br>What is the <strong>Sensitivity</strong> of the Tickle-Test?", options: ["30%", "45%", "90%", "95%"], correctIndex: 2, explanation: "<strong>Correct Answer: 90%</strong><br><br>• True Positives (TP) = 90<br>• Total with Disease = 100<br>• Formula: TP / Total Sick = 90 / 100 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Allison uses a 'Noodle-Squeezer' to screen chefs for 'Spaghetti Fingers'.<br><br>• 50 truly have Spaghetti Fingers.<br>• 350 do not.<br>• Among the 350 WITHOUT the condition, 300 test negative.<br><br>What is the <strong>Specificity</strong> of the Noodle-Squeezer?", options: ["75%", "85.7%", "14.3%", "100%"], correctIndex: 1, explanation: "<strong>Correct Answer: 85.7%</strong><br><br>• True Negatives (TN) = 300<br>• Total Healthy = 350<br>• Formula: TN / Total Healthy = 300 / 350 = 0.857 or <strong>85.7%</strong>." },
-        { question: "Dr. Aria is combating an outbreak of 'Chronic Yodeling'.<br><br>• 150 people receive a POSITIVE test result.<br>• Only 50 of those actually have Chronic Yodeling.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["33.3%", "50%", "66.6%", "30%"], correctIndex: 0, explanation: "<strong>Correct Answer: 33.3%</strong><br><br>• True Positives (TP) = 50<br>• Total Positive Tests = 150<br>• Formula: 50 / 150 = 0.333 or <strong>33.3%</strong>." },
-        { question: "Dr. Allison is diagnosing 'Sudden Invisibility'.<br><br>• 200 people receive a NEGATIVE test result.<br>• 180 of them truly are NOT invisible, but 20 actually were.<br><br>What is the <strong>Negative Predictive Value (NPV)</strong>?", options: ["10%", "80%", "90%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 90%</strong><br><br>• True Negatives (TN) = 180<br>• Total Negative Tests = 200<br>• Formula: 180 / 200 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Aria investigates 'Taco Sweats'.<br><br>• Exposed (Lava Sauce): 200 people, 100 got Taco Sweats.<br>• Unexposed (No Lava Sauce): 300 people, 50 got Taco Sweats.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["1.5", "2.0", "3.0", "6.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 3.0</strong><br><br>• Risk(Exposed) = 100 / 200 = 0.50<br>• Risk(Unexposed) = 50 / 300 = 0.166...<br>• Formula: 0.50 / 0.166 = <strong>3.0</strong>." },
-        { question: "Dr. Allison conducts a case-control study on 'Neon Sneeze'.<br><br>• 100 Cases: 80 snorted 'Glitter Dust', 20 did not.<br>• 100 Controls: 40 snorted 'Glitter Dust', 60 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["2.0", "4.0", "6.0", "8.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 6.0</strong><br><br>• Formula: (80 * 60) / (20 * 40) = 4800 / 800 = <strong>6.0</strong>." },
-        { question: "Dr. Aria screens 500 patients for 'Jelly Legs'.<br><br>• 100 truly have Jelly Legs, 80 test positive.<br>• 400 are completely healthy, but 40 of them falsely test positive.<br><br>What is the test's <strong>Specificity</strong>?", options: ["80%", "90%", "10%", "20%"], correctIndex: 1, explanation: "<strong>Correct Answer: 90%</strong><br><br>• False Positives = 40<br>• True Negatives = 400 - 40 = 360<br>• Formula: 360 / 400 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Allison studies 'Glitchy Eye' syndrome.<br><br>• Exposed (>10 hrs screen): 150 gamers, 60 develop Glitchy Eye.<br>• Unexposed (<10 hrs screen): 250 gamers, 25 develop Glitchy Eye.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["2.0", "3.0", "4.0", "5.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 4.0</strong><br><br>• Risk(Exposed) = 60 / 150 = 0.40<br>• Risk(Unexposed) = 25 / 250 = 0.10<br>• Formula: 0.40 / 0.10 = <strong>4.0</strong>." },
-        { question: "Dr. Aria investigates 'Socks-with-Sandals Syndrome' (SSS).<br><br>• Cases (80 people): 60 wore Crocs, 20 did not.<br>• Controls (80 people): 20 wore Crocs, 60 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["3.0", "4.5", "6.0", "9.0"], correctIndex: 3, explanation: "<strong>Correct Answer: 9.0</strong><br><br>• Formula: (60 * 60) / (20 * 20) = 3600 / 400 = <strong>9.0</strong>." },
-        { question: "Dr. Allison deals with 'Hiccup-itis'.<br><br>• The test yields 200 POSITIVE results overall.<br>• 40 of those positive results were False Positives.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["20%", "80%", "100%", "Cannot be determined"], correctIndex: 1, explanation: "<strong>Correct Answer: 80%</strong><br><br>• Total Positives = 200<br>• False Positives = 40, so True Positives = 160.<br>• Formula: 160 / 200 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Aria tests 200 people for 'Dragon Breath'.<br><br>• 200 people truly have Dragon Breath.<br>• Of those, 150 test positive.<br><br>What is the <strong>Sensitivity</strong>?", options: ["25%", "50%", "75%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 75%</strong><br><br>• Formula: 150 / 200 = 0.75 or <strong>75%</strong>." },
-        { question: "Dr. Allison screens 300 gymnasts for 'Rubber Bones'.<br><br>• All 300 do NOT have it.<br>• The test correctly returns negative for 240 of them.<br><br>What is the <strong>Specificity</strong>?", options: ["20%", "80%", "60%", "100%"], correctIndex: 1, explanation: "<strong>Correct Answer: 80%</strong><br><br>• Formula: 240 / 300 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Aria uses the Stare-Down test for 'Uncontrollable Wink'.<br><br>• The test flags 100 people as POSITIVE.<br>• Only 30 actually have the condition.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["30%", "70%", "100%", "3.3%"], correctIndex: 0, explanation: "<strong>Correct Answer: 30%</strong><br><br>• Formula: 30 / 100 = 0.30 or <strong>30%</strong>." },
-        { question: "Dr. Allison tests for 'Invisible Eyebrows'.<br><br>• 400 people test NEGATIVE.<br>• 380 truly do not have it, 20 actually do.<br><br>What is the <strong>Negative Predictive Value (NPV)</strong>?", options: ["5%", "90%", "95%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 95%</strong><br><br>• Formula: 380 / 400 = 0.95 or <strong>95%</strong>." },
-        { question: "Dr. Aria investigates 'Brain Freeze'.<br><br>• Exposed (Chugged): 100 campers, 60 got Brain Freeze.<br>• Unexposed (Sipped): 100 campers, 20 got Brain Freeze.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["2.0", "3.0", "4.0", "6.0"], correctIndex: 1, explanation: "<strong>Correct Answer: 3.0</strong><br><br>• Formula: (60/100) / (20/100) = <strong>3.0</strong>." },
-        { question: "Dr. Allison runs a study on 'Leprechaun Ear'.<br><br>• 50 Cases: 40 ate Clovers, 10 did not.<br>• 50 Controls: 10 ate Clovers, 40 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["4.0", "8.0", "12.0", "16.0"], correctIndex: 3, explanation: "<strong>Correct Answer: 16.0</strong><br><br>• Formula: (40*40) / (10*10) = 1600 / 100 = <strong>16.0</strong>." },
-        { question: "Dr. Aria tests 50 vampires for 'Dull Fangs'.<br><br>• All 50 truly have Dull Fangs.<br>• 45 test positive.<br><br>What is the <strong>Sensitivity</strong>?", options: ["90%", "10%", "50%", "100%"], correctIndex: 0, explanation: "<strong>Correct Answer: 90%</strong><br><br>• Formula: 45 / 50 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Allison tests 500 sailors for 'Mermaid Tail'.<br><br>• None of the 500 have the condition.<br>• 450 test negative.<br><br>What is the <strong>Specificity</strong>?", options: ["10%", "80%", "90%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 90%</strong><br><br>• Formula: 450 / 500 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Aria tests for 'Werewolf Howl'.<br><br>• She gets 200 POSITIVE results.<br>• Only 50 people actually turn into werewolves.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["25%", "50%", "75%", "100%"], correctIndex: 0, explanation: "<strong>Correct Answer: 25%</strong><br><br>• Formula: 50 / 200 = 0.25 or <strong>25%</strong>." },
-        { question: "Dr. Allison checks for 'Fairy Wings'.<br><br>• 150 test NEGATIVE.<br>• 120 truly don't have wings, but 30 do.<br><br>What is the <strong>Negative Predictive Value (NPV)</strong>?", options: ["20%", "60%", "80%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 80%</strong><br><br>• Formula: 120 / 150 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Aria studies 'Clown Nose' outbreaks.<br><br>• Exposed (Honked): 200 people, 100 got Clown Nose.<br>• Unexposed (Did not honk): 200 people, 50 got Clown Nose.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["0.5", "1.5", "2.0", "4.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 2.0</strong><br><br>• Formula: (100/200) / (50/200) = <strong>2.0</strong>." },
-        { question: "Dr. Allison investigates 'Pirate Peg-Leg'.<br><br>• Cases (100 Pirates): 80 sailed, 20 stayed on land.<br>• Controls (100 Civilians): 40 sailed, 60 stayed on land.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["2.0", "4.0", "6.0", "8.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 6.0</strong><br><br>• Formula: (80*60) / (20*40) = 4800 / 800 = <strong>6.0</strong>." },
-        { question: "Dr. Aria evaluates a test for 'Ghostly Pallor'.<br><br>• She tests 150 genuine ghosts.<br>• The test only comes back positive for 50 of them.<br><br>What is the test's <strong>Sensitivity</strong>?", options: ["25%", "33.3%", "50%", "66.6%"], correctIndex: 1, explanation: "<strong>Correct Answer: 33.3%</strong><br><br>• Formula: 50 / 150 = 0.333 or <strong>33.3%</strong>." },
-        { question: "Dr. Allison uses a test for 'Mummy Wrap'.<br><br>• She tests 200 living humans.<br>• 180 test negative, 20 falsely test positive.<br><br>What is the <strong>Specificity</strong>?", options: ["10%", "80%", "90%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 90%</strong><br><br>• Formula: 180 / 200 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Aria tests for 'Frankenstein Bolts'.<br><br>• The magnet flags 80 people as POSITIVE.<br>• Only 40 actually have bolts.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["20%", "40%", "50%", "80%"], correctIndex: 2, explanation: "<strong>Correct Answer: 50%</strong><br><br>• Formula: 40 / 80 = 0.50 or <strong>50%</strong>." },
-        { question: "Dr. Allison screens for 'Gargoyle Stone' disease.<br><br>• 500 people test NEGATIVE.<br>• 490 are truly fine, 10 are actually turning to stone.<br><br>What is the <strong>Negative Predictive Value (NPV)</strong>?", options: ["2%", "50%", "90%", "98%"], correctIndex: 3, explanation: "<strong>Correct Answer: 98%</strong><br><br>• Formula: 490 / 500 = 0.98 or <strong>98%</strong>." },
-        { question: "Dr. Aria tracks 'Sasquatch Feet'.<br><br>• Exposed (Barefoot): 300 people, 150 got Sasquatch Feet.<br>• Unexposed (Boots): 300 people, 30 got Sasquatch Feet.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["3.0", "4.0", "5.0", "10.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 5.0</strong><br><br>• Formula: (150/300) / (30/300) = <strong>5.0</strong>." },
-        { question: "Dr. Allison studies 'Chupacabra Spikes'.<br><br>• Cases (80): 60 drank goat milk, 20 did not.<br>• Controls (80): 20 drank goat milk, 60 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["3.0", "6.0", "9.0", "12.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 9.0</strong><br><br>• Formula: (60*60) / (20*20) = 3600 / 400 = <strong>9.0</strong>." },
-        { question: "Dr. Aria tests 10 magical ponies for 'Unicorn Horn'.<br><br>• All 10 truly have the condition.<br>• Her scanner flags all 10 as positive.<br><br>What is the test's <strong>Sensitivity</strong>?", options: ["0%", "50%", "90%", "100%"], correctIndex: 3, explanation: "<strong>Correct Answer: 100%</strong><br><br>• Formula: 10 / 10 = 1.0 or <strong>100%</strong>." },
-        { question: "Dr. Allison tests 1000 knights for 'Dragon Scales'.<br><br>• None have the condition.<br>• 950 test negative, 50 false positives.<br><br>What is the test's <strong>Specificity</strong>?", options: ["5%", "50%", "95%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 95%</strong><br><br>• Formula: 950 / 1000 = 0.95 or <strong>95%</strong>." },
-        { question: "Dr. Aria screens for 'Spontaneous Levitation'.<br><br>• 100 people truly have the condition.<br>• 80 of them test positive.<br><br>What is the <strong>Sensitivity</strong>?", options: ["20%", "40%", "80%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 80%</strong><br><br>• Formula: 80 / 100 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Allison uses a Sugar-Sniffer to test for 'Jellybean Toes'.<br><br>• She tests 200 people who do NOT have it.<br>• 190 correctly test negative.<br><br>What is the <strong>Specificity</strong>?", options: ["5%", "90%", "95%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 95%</strong><br><br>• Formula: 190 / 200 = 0.95 or <strong>95%</strong>." },
-        { question: "Dr. Aria uses a Groovy-Scanner.<br><br>• The scanner yields 100 POSITIVE results.<br>• Only 60 actually have the condition.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["40%", "60%", "100%", "Cannot be determined"], correctIndex: 1, explanation: "<strong>Correct Answer: 60%</strong><br><br>• Formula: 60 / 100 = 0.60 or <strong>60%</strong>." },
-        { question: "Dr. Allison screens for 'Werewolf Whiskers'.<br><br>• 300 test NEGATIVE.<br>• 270 are truly human, but 30 have whiskers.<br><br>What is the <strong>Negative Predictive Value (NPV)</strong>?", options: ["10%", "30%", "90%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 90%</strong><br><br>• Formula: 270 / 300 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Aria tracks 'Lava Burps'.<br><br>• Exposed: 100 people, 80 got sick.<br>• Unexposed: 200 people, 20 got sick.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["2.0", "4.0", "6.0", "8.0"], correctIndex: 3, explanation: "<strong>Correct Answer: 8.0</strong><br><br>• Formula: (80/100) / (20/200) = <strong>8.0</strong>." },
-        { question: "Dr. Allison conducts a study on 'Glitter Dandruff'.<br><br>• Cases (100): 90 rolled in Fairy Dust, 10 did not.<br>• Controls (100): 30 rolled in Fairy Dust, 70 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["10.0", "15.0", "21.0", "25.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 21.0</strong><br><br>• Formula: (90*70) / (10*30) = 6300 / 300 = <strong>21.0</strong>." },
-        { question: "Dr. Aria uses a Spring-Scale for 'Bouncy Hair'.<br><br>• 40 people truly have Bouncy Hair.<br>• The test correctly flags 10 as positive.<br><br>What is the <strong>Sensitivity</strong>?", options: ["10%", "25%", "50%", "75%"], correctIndex: 1, explanation: "<strong>Correct Answer: 25%</strong><br><br>• Formula: 10 / 40 = 0.25 or <strong>25%</strong>." },
-        { question: "Dr. Allison tests for 'Robot Voice'.<br><br>• She tests 500 normal humans.<br>• 400 test negative, 100 falsely test positive.<br><br>What is the <strong>Specificity</strong>?", options: ["20%", "60%", "80%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 80%</strong><br><br>• Formula: 400 / 500 = 0.80 or <strong>80%</strong>." },
-        { question: "Dr. Aria checks for 'Unicorn Flu'.<br><br>• The swab flags 80 people as POSITIVE.<br>• Half of them (40) actually have Unicorn Flu.<br><br>What is the <strong>Positive Predictive Value (PPV)</strong>?", options: ["20%", "40%", "50%", "80%"], correctIndex: 2, explanation: "<strong>Correct Answer: 50%</strong><br><br>• Formula: 40 / 80 = 0.50 or <strong>50%</strong>." },
-        { question: "Dr. Allison screens for 'Zombie Shuffle'.<br><br>• 1000 test NEGATIVE.<br>• 990 are truly fine, but 10 are zombies.<br><br>What is the <strong>Negative Predictive Value (NPV)</strong>?", options: ["1%", "90%", "99%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 99%</strong><br><br>• Formula: 990 / 1000 = 0.99 or <strong>99%</strong>." },
-        { question: "Dr. Aria tracks 'Neon Sweat'.<br><br>• Exposed: 50 people, 25 got sick.<br>• Unexposed: 150 people, 15 got sick.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["2.0", "3.0", "5.0", "10.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 5.0</strong><br><br>• Formula: (25/50) / (15/150) = <strong>5.0</strong>." },
-        { question: "Dr. Allison investigates 'Pirate Eye'.<br><br>• Cases (50): 40 wore eyepatch, 10 did not.<br>• Controls (50): 10 wore eyepatch, 40 did not.<br><br>What is the <strong>Odds Ratio (OR)</strong>?", options: ["4.0", "8.0", "16.0", "32.0"], correctIndex: 2, explanation: "<strong>Correct Answer: 16.0</strong><br><br>• Formula: (40*40) / (10*10) = 1600 / 100 = <strong>16.0</strong>." },
-        { question: "Dr. Aria screens for 'Gargoyle Breath'.<br><br>• 200 people truly have the condition.<br>• Her test correctly identifies 190 of them.<br><br>What is the <strong>Sensitivity</strong>?", options: ["10%", "50%", "90%", "95%"], correctIndex: 3, explanation: "<strong>Correct Answer: 95%</strong><br><br>• Formula: 190 / 200 = 0.95 or <strong>95%</strong>." },
-        { question: "Dr. Allison tests for 'Mermaid Scales'.<br><br>• She tests 100 perfectly healthy people.<br>• 10 falsely test positive, 90 test negative.<br><br>What is the <strong>Specificity</strong>?", options: ["10%", "80%", "90%", "100%"], correctIndex: 2, explanation: "<strong>Correct Answer: 90%</strong><br><br>• Formula: 90 / 100 = 0.90 or <strong>90%</strong>." },
-        { question: "Dr. Aria looks into 'Hiccup-Mania'.<br><br>• Exposed: 400 people, 100 got Hiccup-Mania.<br>• Unexposed: 400 people, 20 got Hiccup-Mania.<br><br>What is the <strong>Relative Risk (RR)</strong>?", options: ["2.0", "3.0", "4.0", "5.0"], correctIndex: 3, explanation: "<strong>Correct Answer: 5.0</strong><br><br>• Formula: (100/400) / (20/400) = <strong>5.0</strong>." }
+        { 
+            question: `Dr. Aria tests a new screening device called the "Vibe-Check" to detect a caffeine-induced ailment known as "Jumping Bean Jitters." She rolls out the test to a sample of 1,000 office workers. Through meticulous gold-standard clinical interviews, she confirms that 250 of these workers truly have Jumping Bean Jitters. When all 1,000 workers are run through the Vibe-Check, the machine returns 300 positive results. However, reviewing the logs reveals that 50 of the workers who actually had the condition tested completely negative. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Vibe-Check.`, 
+            options: [
+                "Sens: 80.0%, Spec: 86.7%, PPV: 66.7%, NPV: 92.9%", 
+                "Sens: 86.7%, Spec: 80.0%, PPV: 92.9%, NPV: 66.7%", 
+                "Sens: 75.5%, Spec: 85.0%, PPV: 70.0%, NPV: 90.0%", 
+                "Sens: 90.0%, Spec: 75.5%, PPV: 60.0%, NPV: 85.0%"
+            ], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 86.7%, PPV: 66.7%, NPV: 92.9%</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total workers = 1000<br>
+            • Truly Sick = 250 (So, Truly Healthy = 750).<br>
+            • Total Test Positive = 300.<br>
+            • False Negatives (Missed the disease) = 50.<br>
+            • True Positives = 250 (total sick) - 50 = 200.<br>
+            • False Positives = 300 (total positive tests) - 200 = 100.<br>
+            • True Negatives = 750 (total healthy) - 100 = 650.<br>
+            <table>
+                <tr><th></th><th>Jitters (+)</th><th>Jitters (-)</th><th>Total</th></tr>
+                <tr><td><strong>Test (+)</strong></td><td>200</td><td>100</td><td>300</td></tr>
+                <tr><td><strong>Test (-)</strong></td><td>50</td><td>650</td><td>700</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>250</td><td>750</td><td>1000</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Sensitivity = 200 / 250 = 80.0%<br>
+            • Specificity = 650 / 750 = 86.7%<br>
+            • PPV = 200 / 300 = 66.7%<br>
+            • NPV = 650 / 700 = 92.9%` 
+        },
+        { 
+            question: `Dr. Allison conducts a cohort study at an amusement park to determine if eating "Pink Cloud Fluff" results in a chronic "Cotton Candy Cough." She follows 800 park attendees. She notes that 300 attendees gorged on the Pink Cloud Fluff (the exposed group), while the remaining 500 steered clear. Over the next month, 180 attendees in total reported having the Cotton Candy Cough. Surprisingly, 60 of the attendees who developed the cough had never eaten the fluff. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: [
+                "RR: 3.33, OR: 4.89", 
+                "RR: 4.89, OR: 3.33", 
+                "RR: 2.50, OR: 5.50", 
+                "RR: 4.00, OR: 6.25"
+            ], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: RR: 3.33, OR: 4.89</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total cohort = 800<br>
+            • Exposed = 300 (So, Unexposed = 500).<br>
+            • Total Sick = 180.<br>
+            • Sick & Unexposed = 60.<br>
+            • Sick & Exposed = 180 (total sick) - 60 = 120.<br>
+            • Healthy & Exposed = 300 (total exposed) - 120 = 180.<br>
+            • Healthy & Unexposed = 500 (total unexposed) - 60 = 440.<br>
+            <table>
+                <tr><th></th><th>Cotton Candy Cough (+)</th><th>Cotton Candy Cough (-)</th><th>Total</th></tr>
+                <tr><td><strong>Ate Fluff (+)</strong></td><td>120 (A)</td><td>180 (B)</td><td>300</td></tr>
+                <tr><td><strong>No Fluff (-)</strong></td><td>60 (C)</td><td>440 (D)</td><td>500</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>180</td><td>620</td><td>800</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Risk (Exposed) = 120 / 300 = 0.40<br>
+            • Risk (Unexposed) = 60 / 500 = 0.12<br>
+            • Relative Risk (RR) = 0.40 / 0.12 = 3.33<br>
+            • Odds Ratio (OR) = (120 × 440) / (180 × 60) = 52800 / 10800 = 4.89` 
+        },
+        { 
+            question: `Dr. Aria initiates a case-control study to investigate "Square Eyes" syndrome. She recruits 200 teenagers currently suffering from Square Eyes (the cases) and 200 teenagers with perfect vision (the controls). She investigates their habits to see if they had spent the summer binge-watching 90s sitcoms. Her survey reveals that 220 participants across the whole study had been binge-watching. When analyzing the healthy control group, she finds that 60 of them had also binge-watched the sitcoms. <br><br>Based on this study design, calculate the <strong>Odds Ratio (OR)</strong>.`, 
+            options: [
+                "OR: 7.25", 
+                "OR: 8.50", 
+                "OR: 9.33", 
+                "OR: 10.50"
+            ], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 9.33</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Cases (Disease +) = 200<br>
+            • Controls (Disease -) = 200<br>
+            • Total Exposed (Binge-watched) = 220.<br>
+            • Exposed Controls = 60.<br>
+            • Unexposed Controls = 200 - 60 = 140.<br>
+            • Exposed Cases = 220 (total exposed) - 60 (exposed controls) = 160.<br>
+            • Unexposed Cases = 200 (total cases) - 160 = 40.<br>
+            <table>
+                <tr><th></th><th>Square Eyes (Cases)</th><th>Perfect Vision (Controls)</th><th>Total</th></tr>
+                <tr><td><strong>Binge-watched (+)</strong></td><td>160 (A)</td><td>60 (B)</td><td>220</td></tr>
+                <tr><td><strong>Did Not Binge (-)</strong></td><td>40 (C)</td><td>140 (D)</td><td>180</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>200</td><td>200</td><td>400</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Odds Ratio (OR) = (A × D) / (B × C) = (160 × 140) / (60 × 40) = 22400 / 2400 = 9.33` 
+        },
+        { 
+            question: `Dr. Allison is testing a new "Garlic-Sniff" diagnostic tool to screen for "Vampire Fangs" at an alternative dentistry clinic. She conducts a trial on 1,200 volunteers. Dental x-rays confirm that exactly 100 of these volunteers secretly have the fangs. The Garlic-Sniff test ends up flagging 200 people as positive overall. When auditing the results, Dr. Allison discovers that the test falsely triggered a positive result for 120 completely normal, fangless volunteers. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Garlic-Sniff test.`, 
+            options: [
+                "Sens: 80.0%, Spec: 89.1%, PPV: 40.0%, NPV: 98.0%", 
+                "Sens: 89.1%, Spec: 80.0%, PPV: 98.0%, NPV: 40.0%", 
+                "Sens: 75.0%, Spec: 92.5%, PPV: 50.0%, NPV: 95.0%", 
+                "Sens: 85.0%, Spec: 85.0%, PPV: 45.0%, NPV: 90.0%"
+            ], 
+            correctIndex: 0, 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 89.1%, PPV: 40.0%, NPV: 98.0%</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total volunteers = 1200<br>
+            • Truly Sick = 100 (So, Truly Healthy = 1100).<br>
+            • Total Test Positive = 200.<br>
+            • False Positives = 120.<br>
+            • True Positives = 200 (total test positive) - 120 = 80.<br>
+            • False Negatives = 100 (total sick) - 80 = 20.<br>
+            • True Negatives = 1100 (total healthy) - 120 = 980.<br>
+            <table>
+                <tr><th></th><th>Vampire Fangs (+)</th><th>Vampire Fangs (-)</th><th>Total</th></tr>
+                <tr><td><strong>Test (+)</strong></td><td>80</td><td>120</td><td>200</td></tr>
+                <tr><td><strong>Test (-)</strong></td><td>20</td><td>980</td><td>1000</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>100</td><td>1100</td><td>1200</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Sensitivity = 80 / 100 = 80.0%<br>
+            • Specificity = 980 / 1100 = 89.1%<br>
+            • PPV = 80 / 200 = 40.0%<br>
+            • NPV = 980 / 1000 = 98.0%` 
+        },
+        { 
+            question: `Dr. Aria leads a cohort study tracking 1,000 citizens to determine if wearing "Anti-Gravity Boots" results in developing "Hovercraft Heels." During her observation, she notes that 400 citizens buy and wear the boots (the exposed group). By the end of the year, 250 citizens have developed Hovercraft Heels. Upon reviewing their shopping histories, she finds that 200 of the afflicted citizens had indeed worn the boots. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: [
+                "RR: 3.5, OR: 7.0", 
+                "RR: 4.0, OR: 8.5", 
+                "RR: 6.0, OR: 11.0", 
+                "RR: 5.5, OR: 10.0"
+            ], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: RR: 6.0, OR: 11.0</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total cohort = 1000<br>
+            • Exposed = 400 (So, Unexposed = 600).<br>
+            • Total Sick = 250.<br>
+            • Sick & Exposed = 200.<br>
+            • Healthy & Exposed = 400 (total exposed) - 200 = 200.<br>
+            • Sick & Unexposed = 250 (total sick) - 200 = 50.<br>
+            • Healthy & Unexposed = 600 (total unexposed) - 50 = 550.<br>
+            <table>
+                <tr><th></th><th>Hovercraft Heels (+)</th><th>Hovercraft Heels (-)</th><th>Total</th></tr>
+                <tr><td><strong>Wore Boots (+)</strong></td><td>200 (A)</td><td>200 (B)</td><td>400</td></tr>
+                <tr><td><strong>No Boots (-)</strong></td><td>50 (C)</td><td>550 (D)</td><td>600</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>250</td><td>750</td><td>1000</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Risk (Exposed) = 200 / 400 = 0.50<br>
+            • Risk (Unexposed) = 50 / 600 = 0.0833<br>
+            • Relative Risk (RR) = 0.50 / 0.0833 = 6.0<br>
+            • Odds Ratio (OR) = (200 × 550) / (200 × 50) = 110000 / 10000 = 11.0` 
+        },
+        { 
+            question: `Dr. Allison conducts a case-control study investigating "Cactus Hugger's Rash" among hikers. She recruits 150 individuals currently suffering from the rash (the cases) and 150 individuals with clear skin (the controls). She investigates whether they recently participated in the controversial "Blindfolded Desert Hike." Across both groups, 130 participants had indeed done the blindfolded hike. Dr. Allison finds that 110 people in the healthy control group had avoided the blindfolded hike completely. <br><br>Based on this study, calculate the <strong>Odds Ratio (OR)</strong>.`, 
+            options: [
+                "OR: 2.50", 
+                "OR: 3.85", 
+                "OR: 4.13", 
+                "OR: 5.00"
+            ], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 4.13</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Cases (Disease +) = 150<br>
+            • Controls (Disease -) = 150<br>
+            • Total Exposed (Did Hike) = 130.<br>
+            • Unexposed Controls = 110.<br>
+            • Exposed Controls = 150 (total controls) - 110 = 40.<br>
+            • Exposed Cases = 130 (total exposed) - 40 (exposed controls) = 90.<br>
+            • Unexposed Cases = 150 (total cases) - 90 = 60.<br>
+            <table>
+                <tr><th></th><th>Cactus Rash (Cases)</th><th>Clear Skin (Controls)</th><th>Total</th></tr>
+                <tr><td><strong>Did Hike (+)</strong></td><td>90 (A)</td><td>40 (B)</td><td>130</td></tr>
+                <tr><td><strong>No Hike (-)</strong></td><td>60 (C)</td><td>110 (D)</td><td>170</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>150</td><td>150</td><td>300</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Odds Ratio (OR) = (A × D) / (B × C) = (90 × 110) / (40 × 60) = 9900 / 2400 = 4.125 (Rounds to 4.13)` 
+        },
+        { 
+            question: `Dr. Aria uses an advanced 'Pixel-Peeper' diagnostic program to test 800 tech employees for a visual defect called "Glitchy Hologram Syndrome." Through deep optometry exams, she is certain that 200 of these employees truly have the condition. The Pixel-Peeper yields 180 positive results overall. However, Dr. Aria finds a calibration error: 40 employees who actually suffer from the condition passed the test and were marked negative. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Pixel-Peeper.`, 
+            options: [
+                "Sens: 75.0%, Spec: 90.0%, PPV: 85.0%, NPV: 90.0%", 
+                "Sens: 80.0%, Spec: 96.7%, PPV: 88.9%, NPV: 93.5%", 
+                "Sens: 88.9%, Spec: 93.5%, PPV: 80.0%, NPV: 96.7%", 
+                "Sens: 90.0%, Spec: 85.5%, PPV: 75.0%, NPV: 85.0%"
+            ], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: Sens: 80.0%, Spec: 96.7%, PPV: 88.9%, NPV: 93.5%</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total employees = 800<br>
+            • Truly Sick = 200 (So, Truly Healthy = 600).<br>
+            • Total Test Positive = 180.<br>
+            • False Negatives (Missed disease) = 40.<br>
+            • True Positives = 200 (total sick) - 40 = 160.<br>
+            • False Positives = 180 (total positive) - 160 = 20.<br>
+            • True Negatives = 600 (total healthy) - 20 = 580.<br>
+            <table>
+                <tr><th></th><th>Glitchy Hologram (+)</th><th>Glitchy Hologram (-)</th><th>Total</th></tr>
+                <tr><td><strong>Test (+)</strong></td><td>160</td><td>20</td><td>180</td></tr>
+                <tr><td><strong>Test (-)</strong></td><td>40</td><td>580</td><td>620</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>200</td><td>600</td><td>800</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Sensitivity = 160 / 200 = 80.0%<br>
+            • Specificity = 580 / 600 = 96.7%<br>
+            • PPV = 160 / 180 = 88.9%<br>
+            • NPV = 580 / 620 = 93.5%` 
+        },
+        { 
+            question: `Dr. Allison monitors a cohort of 600 summer campers to see if swimming in the off-limits "Ooze Pool" leads to "Slime Sweat." She records that 200 campers broke the rules and swam in the pool (the exposed group). By the end of camp, 180 campers in total started sweating slime. Curiously, when she reviews the camp counselors' logs, she finds that 80 of the campers who got sick had strictly stayed in the normal pool and never touched the ooze. <br><br>Calculate the <strong>Relative Risk (RR) and Odds Ratio (OR)</strong>.`, 
+            options: [
+                "RR: 3.0, OR: 5.5", 
+                "RR: 2.5, OR: 4.0", 
+                "RR: 4.0, OR: 2.5", 
+                "RR: 3.5, OR: 6.0"
+            ], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: RR: 2.5, OR: 4.0</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total cohort = 600<br>
+            • Exposed = 200 (So, Unexposed = 400).<br>
+            • Total Sick = 180.<br>
+            • Sick & Unexposed = 80.<br>
+            • Sick & Exposed = 180 (total sick) - 80 = 100.<br>
+            • Healthy & Exposed = 200 (total exposed) - 100 = 100.<br>
+            • Healthy & Unexposed = 400 (total unexposed) - 80 = 320.<br>
+            <table>
+                <tr><th></th><th>Slime Sweat (+)</th><th>Slime Sweat (-)</th><th>Total</th></tr>
+                <tr><td><strong>Ooze Pool (+)</strong></td><td>100 (A)</td><td>100 (B)</td><td>200</td></tr>
+                <tr><td><strong>Normal Pool (-)</strong></td><td>80 (C)</td><td>320 (D)</td><td>400</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>180</td><td>420</td><td>600</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Risk (Exposed) = 100 / 200 = 0.50<br>
+            • Risk (Unexposed) = 80 / 400 = 0.20<br>
+            • Relative Risk (RR) = 0.50 / 0.20 = 2.5<br>
+            • Odds Ratio (OR) = (100 × 320) / (100 × 80) = 32000 / 8000 = 4.0` 
+        },
+        { 
+            question: `Dr. Aria runs a case-control study investigating "Werewolf Howl" syndrome in an isolated mountain town. She studies 250 patients suffering from the condition (the cases) and 250 locals who never howl (the controls). She queries them about their consumption of a local delicacy, the "Moon-Cheese." She discovers that 250 people in the entire study had eaten the cheese. Within the healthy control group, exactly 50 people admitted to eating the cheese. <br><br>Determine the <strong>Odds Ratio (OR)</strong>.`, 
+            options: [
+                "OR: 8.0", 
+                "OR: 12.0", 
+                "OR: 16.0", 
+                "OR: 20.0"
+            ], 
+            correctIndex: 2, 
+            explanation: `<strong>Correct Answer: OR: 16.0</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Cases (Disease +) = 250<br>
+            • Controls (Disease -) = 250<br>
+            • Total Exposed (Ate Cheese) = 250.<br>
+            • Exposed Controls = 50.<br>
+            • Unexposed Controls = 250 - 50 = 200.<br>
+            • Exposed Cases = 250 (total exposed) - 50 (exposed controls) = 200.<br>
+            • Unexposed Cases = 250 (total cases) - 200 = 50.<br>
+            <table>
+                <tr><th></th><th>Werewolf Howl (Cases)</th><th>No Howl (Controls)</th><th>Total</th></tr>
+                <tr><td><strong>Moon-Cheese (+)</strong></td><td>200 (A)</td><td>50 (B)</td><td>250</td></tr>
+                <tr><td><strong>No Cheese (-)</strong></td><td>50 (C)</td><td>200 (D)</td><td>250</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>250</td><td>250</td><td>500</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Odds Ratio (OR) = (A × D) / (B × C) = (200 × 200) / (50 × 50) = 40000 / 2500 = 16.0` 
+        },
+        { 
+            question: `Dr. Allison evaluates a new "Toadstool-Scanner" designed to detect "Gnome Hat Growth" in a clinical trial of 1,500 forest volunteers. She uses precise measurements to verify that 300 of the volunteers truly have a tiny hat growing under their hair. The Toadstool-Scanner flags a total of 400 people as positive. When auditing the data, Dr. Allison finds that the scanner reacted to thick hair gel in 150 completely healthy people, falsely reporting them as positive. <br><br>Calculate the <strong>Sensitivity, Specificity, PPV, and NPV</strong> of the Toadstool-Scanner.`, 
+            options: [
+                "Sens: 75.0%, Spec: 90.0%, PPV: 60.0%, NPV: 85.0%", 
+                "Sens: 83.3%, Spec: 87.5%, PPV: 62.5%, NPV: 95.5%", 
+                "Sens: 87.5%, Spec: 83.3%, PPV: 95.5%, NPV: 62.5%", 
+                "Sens: 80.0%, Spec: 85.0%, PPV: 70.0%, NPV: 90.0%"
+            ], 
+            correctIndex: 1, 
+            explanation: `<strong>Correct Answer: Sens: 83.3%, Spec: 87.5%, PPV: 62.5%, NPV: 95.5%</strong><br><br>
+            <strong>Extracted Data:</strong><br>
+            • Total volunteers = 1500<br>
+            • Truly Sick = 300 (So, Truly Healthy = 1200).<br>
+            • Total Test Positive = 400.<br>
+            • False Positives = 150.<br>
+            • True Positives = 400 (total test positive) - 150 = 250.<br>
+            • False Negatives = 300 (total sick) - 250 = 50.<br>
+            • True Negatives = 1200 (total healthy) - 150 = 1050.<br>
+            <table>
+                <tr><th></th><th>Gnome Hat (+)</th><th>Gnome Hat (-)</th><th>Total</th></tr>
+                <tr><td><strong>Test (+)</strong></td><td>250</td><td>150</td><td>400</td></tr>
+                <tr><td><strong>Test (-)</strong></td><td>50</td><td>1050</td><td>1100</td></tr>
+                <tr style="font-weight: bold;"><td>Total</td><td>300</td><td>1200</td><td>1500</td></tr>
+            </table>
+            <strong>Calculations:</strong><br>
+            • Sensitivity = 250 / 300 = 83.3%<br>
+            • Specificity = 1050 / 1200 = 87.5%<br>
+            • PPV = 250 / 400 = 62.5%<br>
+            • NPV = 1050 / 1100 = 95.5%` 
+        }
     ];
 
     let currentQuestionIndex = 0;
